@@ -1,0 +1,17 @@
+Continent,Country,x,y,year,cal_case,cal_death,suspect,new_case,new_death,type
+South America,Argentina,-2.2,-2.3,2009,2485,60,,898,34,H1N1
+Australia,Australia,3.9,-2,2009,5298,10,,730,1,H1N1
+South America,Brazil,-2.4,-4.3,2009,737,1,,0,0,H1N1
+North America,Canada,-4.1,-5,2009,7983,25,,0,0,H1N1
+South America,Chile,-2.5,-2.5,2009,7376,14,,0,0,H1N1
+Asia,China,6,-4.3,2009,2040,0,,226,0,H1N1
+South America,Colombia,-3.9,-4,2009,118,2,,17,0,H1N1
+Asia,Japan,6.9,-3,2009,1790,0,,344,0,H1N1
+Europe,Israel,2.3,1.4,2009,681,0,,104,0,H1N1
+Europe,Italy,0.9,-8.8,2009,146,0,,16,0,H1N1
+North America,Mexico,-5.6,-4,2009,10262,119,,0,0,H1N1
+Asia,Philippines,4.8,-3.5,2009,1709,1,,0,0,H1N1
+North America,United States of America,-5.6,-5.5,2009,33902,170,,0,0,H1N1
+Asia,Viet Nam,5.2,-4.2,2009,181,0,,50,0,H1N1
+Europe,United Kingdom,-0.5,-9.6,2009,7447,3,,0,0,H1N1
+Asia,Thailand,4.9,-4.5,2009,2076,7,,662,4,H1N1

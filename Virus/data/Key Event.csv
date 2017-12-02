@@ -1,0 +1,116 @@
+Disease,Year,Month,Date,Event
+SARS,2002,November,11/16/2002, The first case of atypical pneumonia is reported in the Guangdong province in southern China.
+,2003,March,3/7/2003,"The World Health Organization (WHO) issues a global alert for a severe form of pneumonia of unknown origin in persons from China, Vietnam, and Hong Kong."
+,,,3/14/2003,CDC activated its Emergency Operations Center (EOC).
+,,,3/22/2003,CDC issues interim laboratory biosafety guidelines for handling and processing specimens associated with SARS.
+,,,27, CDC issues interim domestic guidelines for management of exposures to SARS for healthcare and other institutional settings.
+,,,28,The SARs outbreak is more widespread. CDC begins utilizing pandemic planning for SARS.
+,,April,5, CDC establishes community outreach team to address stigmatization associated with SARS.
+,,,10,CDC issued specific guidance for students exposed to SARS.
+,,,14,CDC publishes a sequence of the virus believed to be responsible for the global epidemic of SARS. 
+,,,22,"CDC issues a health alert for travelers to Toronto, Ontario (Canada)"
+,,May,6,"In the United States, no new probable cases were reported in the last 24 hours, and there was no evidence of ongoing transmission beyond the initial case reports in travelers for more than 20 days. "
+,,,20,CDC lifted the travel alert on Toronto because more than 30 days (or three SARS incubation periods) had elapsed since the date of onset of symptoms for the last reported case.
+,,,23,"CDC reinstated travel alert for Toronto because on May 22, Canadian health officials reported a cluster of five new probable SARS cases."
+,,June,4, CDC removed the travel alert for Singapore and downgraded the traveler notification for Hong Kong from a travel advisory to a travel alert.
+,,July,3,CDC removed the travel alert for mainland China.
+,,,5,WHO announced that the global SARS outbreak was contained.
+,,,10,CDC removed the travel alert for Hong Kong and Toronto.
+,,,17, CDC updated the SARS case definition which reduced the number of U.S. cases by half. The change results from excluding cases in which blood specimens that were collected more than 21 days after the onset of illness test negative.
+H1N1,2009,March,25,Onset of first cases in California of what turned out to be A(H1N1)
+,,April,4,Outbreak of influenza like illness starts in Veracruz
+,,,15, Novel influenza A(H1N1) identified and isolated in USA
+,,,24,ECDC goes to Public Health Event (PHE) level 1
+,,,27,ECDC goes to PHE level 2
+,,,30,ECDC publishes first Pandemic Risk Assessments
+,,May,2,WHO publishes instructions on how to obtain PCR kits from United States CDC
+,,,6,WHO technical consultation on the severity of disease caused by the new influenza A (H1N1) virus infections
+,,,18,High level consultation before and at the World Health Assembly including request for some delay in declaring Phase 6 by some Member States
+,,,19,ECDC guidance on personal health measures to reduce risk of influenza transmission
+,,,28,"CDC Guidance on Antiviral Treatment of patients with confirmed, probable or suspected case of new Influenza A(H1N1)"
+,,June,4,EU recommendation for the emergent novel H1N1 influenza vaccine composition
+,,,11,ECDC agrees with WHO?s announcement of raising pandemic alert level to phase 6
+,,,18,Publication of PPT on evolution of the pandemic (H1N1) 2009
+,,,24,ECDC Press briefing on the Latest updates on pandemic (H1N1) 2009 and response strategies (mitigation versus containment)
+,,July,1,Publication of Threat Assessment - First isolation of a secondary oseltamivir-resistant A(H1N1)v strain in Denmark is published
+,,,7,Written information from the Commission services on vaccines and vaccination against influenza A (H1N1)v: update as of 01
+,,,13,WHO recommendations on pandemic (H1N1) 2009 vaccines
+,,,23,"Publication of the report ""Europe?s initial experience with pandemic (H1N1) 2009 - mitigation and delaying ""policies and practices"
+,,,29,First ECDC/EPIET informal seminar on influenza pandemic investigations
+,,August,5,Briefing note on safety of pandemic vaccine by WHO
+,,,13,ECDC interim guidance: Use of specific pandemic influenza vaccines during the H1N1 2009 pandemic
+,,,17,WHO EURO workshop on deployment of pandemic (H1N1) 2009 vaccine
+,,,21,Recommendations of the Advisory Committee on Immunization Practices (ACIP) on the use of influenza A(H1N1) 2009 monovalent vaccine
+,,,31,Publication of European Commission policy statement on vaccination target and priority groups
+,,Septmber,14,Updating of ECDC guidance on public health measures for this pandemic
+,,,18,Meeting on Development of a pandemic vaccine risk-benefit assessment model
+,,,25,Support for developing countries? response to the H1N1 influenza pandemic
+,,,30,Authorization of first two pandemic vaccines (Focetria & Pandemrix) by European Commission
+,,October,1, Inventory of EU research activities and data sources related to the H1N1 vaccines B/R monitoring
+,,,8,Microsoft launches a web-based pandemic influenza self-assessment tool
+,,,19,Pandemic influenza preparedness meeting on sharing of influenza viruses and access to vaccines and other benefits
+,,,23,EMA scientific committee recommends updating product information for Focetria and Pandemrix
+,,,30,WHO SAGE Committee advises on pandemic vaccines
+,,November,5,ECDC Management Board Meeting received briefing
+,,,10,Agreement for donation of pandemic H1N1 vaccine signed
+,,,16,Committee for Medicinal Products for Human Use (CHMP) meeting
+,,,20,EMA reaffirms efficacy and safety of H1N1v pandemic vaccines
+,,December,2,ECDC Director updated EU health ministers on influenza pandemic
+,,,18,Health Security Committee influenza section teleconference with the EMA
+,,,22,Adoption by the European Council of Recommendation on Seasonal influenza immunisation
+,,,29,Publication of recommendations on seasonal influenza vaccination
+,2010,January,14,Annual meeting of the Advisory Board of the EU Project Flusecure
+,,,18,Advisory Forum teleconference on Future look Risk Assessment
+,,,22,EMA recommends update of product information for Pandemrix to include more data from studies in children
+,,Febuary,14,World Health Organization strain selection and vaccine meeting
+,,,18,Update on SCCS and CCS on-going in participating countries
+,,,19,CHMP recommends fifth pandemic vaccine for marketing authorisation
+,,,24,Director-General statement following the seventh meeting of the Emergency Committee
+,,March,3,EU Health Working Party meeting
+,,,8,ECDC's Forward look risk assessment for the 2009 pandemic influenza A(H1N1) and future influenza season
+,,,19,EMA recommends update of product information for Celvapan to include data from clinical studies
+,,April,30,ECDC ceases searching for announced deaths
+,,June,1,Annual Meeting of the European Influenza Surveillance Network (EISN)
+,,,24,Validation procedures for obtained background rates was agreed
+Ebola,2014,March,23,The World Health Organization publishes notification of a “rapidly evolving” Ebola outbreak in Guinea involving 49 patients and 29 deaths. 
+,,,30,"The WHO reports that two Liberians tested positive for the Ebola virus after traveling to Guinea, including a 35-year-old woman who died March 21."
+,,May,10,"Dozens of mourners attend the funeral of a traditional healer who contracted Ebola while treating patients. The funeral, in Koindu, Sierra Leone, helps the virus spread and may be linked to 365 Ebola deaths, local health authorities say."
+,,,25,"Sierra Leone health authorities confirm their first Ebola case, a young woman admitted to a government hospital in Kenema after a miscarriage."
+,,June,15,An international research team sequences the genome of the Zaire strain of the Ebola virus. Researchers around the world begin studying it for clues about how to treat patients or develop drugs.
+,,,23,Doctors Without Borders says the epidemic is “out of control.” The group says it has reached the limit of what it can do to fight the outbreak.
+,,,24,"The U.S. Centers for Disease Control and Prevention reports that the outbreak appeared to be running out of steam in Liberia and Guinea in late April, only to resurge in late May and spread to Sierra Leone."
+,,July,20,"Liberian American Patrick Sawyer ignores the advice of medical officials and flies from Monrovia to Lagos, spreading Ebola to Nigeria.He dies five days later, and the virus goes on to sicken 19 and kill eight, the WHO says."
+,,August,1,"Reviving a practice common during the medieval Black Death, the leaders of Guinea, Liberia and Sierra Leone announce plans to set up a cordon sanitaire. "
+,,,8,"The WHO Emergency Committee declares a Public Health Emergency of International Concern, saying the Ebola outbreak in West Africa constitutes a public health risk to other states and requires a coordinated international response."
+,,,12,"A WHO panel sanctions the use of experimental drugs to fight the epidemic, though supplies are extremely limited."
+,,,28,"The WHO warns that the Ebola outbreak is accelerating and could infect more than 20,000 people before it is brought under control."
+,,Septmber,2,The National Institutes of Health unveils plan to speed development and regulatory approval of ZMapp.
+,,,5,The WHO endorses the use of blood transfusions from recovered patients to boost antibodies for the sick.
+,,,18,The U.N. Security Council declares the Ebola crisis in West Africa a threat to international peace and security.
+,,,24,"U.N. Secretary-General Ban Ki-moon calls for a “twentyfold surge in care, tracking, transport and equipment” to curb the epidemic, which is doubling in size about every three weeks."
+,,October,2,NBC says a freelance cameraman in Liberia has contracted the virus and will be flown back to the U.S. for treatment. 
+,,,17,The WHO declares Senegal to be free of Ebola.
+,,,20,The WHO declares Nigeria to be free of Ebola.
+Zika,2016,January,17,"a baby is born in Hawaii with the Zika virus and microcephaly, the first such case reported in the U.S.; the mother had lived in Brazil in May the previous year."
+,,,19,a man from Thailand becomes the first imported case of Zika virus in Taiwan
+,,,26,Samoa is added to the CDC travel advisory
+,,Febuary,1,the WHO declares the Zika virus outbreak to be a Public Health Emergency of International Concern (PHEIC)
+,,,8,the Obama administration requests $1.8 billion in the fight against Zika
+,,,11, the CDC releases preliminary guidelines regarding the sexual transmission of Zika. Three likely cases are reported
+,,,12, the CDC releases a Level 2 (Practice Enhanced Precautions) travel notice
+,,March,9,"the CDC reports 193 travel-associated Zika virus disease cases, and no locally acquired vector-borne cases"
+,,,24,a genetics study published in Science suggests that the Zika virus had arrived in Brazil between May and December 2013
+,,,30,"the New England Journal of Medicine published ""Zika Virus Infection with Prolonged Maternal Viremia and Fetal Brain Abnormalities,"" which documents the destruction of a fetal brain by Zika in detail"
+,,April,1," the CDC holds a meeting at its headquarters with more than 300 local, state, and federal officials and experts to coordinate the response to Zika, including a reorganization of mosquito control programs"
+,,,16,Peru reports its first case of sexual transmission (and its seventh overall) after a resident infected his wife after contracting the disease in Venezuela
+,,,29, the CDC confirms the first Zika-related death in the US occurred in February 2016.
+,,May,13,the CDC begins to recommend testing urine for clues to Zika infection
+,,,16,Belize confirms its first case of Zika infection
+,,July,29,"the CDC confirms 4 cases of locally transmitted cases of Zika infection in Miami, Florida, the first locally transmitted cases confirmed in the mainland US"
+,,August,12,The U.S. government declares a public health emergency in Puerto Rico as a result of a Zika epidemic
+,,,27,Singapore's Ministry of Health confirms the first case of locally transmitted Zika infections in the country
+,,,29,"Malaysian health authorities say in a press conference that it was ""just a matter of time"" until cases Zika are detected in Malaysia. "
+,,Septmber,1,Health Minister of Malaysia confirmed of the first case of Zika in Malaysia.
+,,,5,"Singapore's Ministry of Health and National Environment Agency said that the total number of locally transmitted Zika virus infections over the weekend was 91, raising the total to 242."
+,,,19,"The CDC lifts official travel guidelines for Miami, Florida."
+,,October,30,Vietnam's Health Ministry has reported a microcephaly case that it says is likely to be the country's first linked to the mosquito-borne Zika virus
