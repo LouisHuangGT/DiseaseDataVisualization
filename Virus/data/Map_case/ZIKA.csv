@@ -1,0 +1,21 @@
+Continent,Country,x,y,year,cal_case,cal_death,suspect,new_case,new_death,type
+North America,Belize,-4.4,-4.9,2016,68,0,756,,,ZIKA
+North America,CostaRica,-4.1,-5,2016,1581,0,3840,,,ZIKA
+North America,Guatemala,-4.8,-4.9,2016,788,0,3343,,,ZIKA
+North America,Honduras,,,2016,298,0,31936,,,ZIKA
+North America,DominicanRepublic,,,2016,331,0,4903,,,ZIKA
+North America,FrenchGuiana,,,2016,483,0,9700,,,ZIKA
+North America,Guadeloupe,,,2016,379,0,30845,,,ZIKA
+North America,Haiti,,,2016,5,0,2955,,,ZIKA
+North America,Martinique,,,2016,12,0,36680,,,ZIKA
+North America,SaintBarthelemy,,,2016,61,0,975,,,ZIKA
+North America,SaintMartin,,,2016,200,0,3115,,,ZIKA
+South America,BoliviaPlurinationalStateof,-2.9,-3.5,2016,156,0,741,,,ZIKA
+North America,Colombia,-3.9,-4,2016,9799,0,96649,,,ZIKA
+South America,Ecuador,-3.9,-3.7,2016,853,0,2678,,,ZIKA
+South America,Peru,-3.8,-3.7,2016,382,0,1395,,,ZIKA
+North America,VenezuelaBolivarianRepublicof,,,2016,2380,0,59235,,,ZIKA
+South America,Brazil,-2.4,-4.3,2016,109596,9,211770,,,ZIKA
+South America,Argentina,-2.2,-2.3,2016,26,0,1821,,,ZIKA
+North America,Mexico,-5.6,-4,2016,7335,0,0,,,ZIKA
+South America,PuertoRico,-4.1,-5,2016,35870,5,0,,,ZIKA

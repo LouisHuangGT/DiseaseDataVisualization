@@ -1,0 +1,12 @@
+Continent,Country,x,y,year,cal_case,cal_death,suspect,new_case,new_death,type
+Africa,Guinea,-0.9,-7.1,2014,2397,1433,34,2397,1433,EBOLA
+Africa,Guinea,-0.9,-7.1,2015,3351,2083,453,954,650,EBOLA
+Europe,Italy,0.9,-8.8,2015,1,0,0,1,0,EBOLA
+Africa,Liberia,-0.8,-6.8,2014,3110,3423,3132,3110,3423,EBOLA
+Africa,Liberia,-0.8,-6.8,2015,10666,4806,5636,7556,1383,EBOLA
+Africa,Nigeria,0.2,-6.7,2014,19,8,0,19,8,EBOLA
+Africa,Nigeria,0.2,-6.7,2015,19,8,0,0,0,EBOLA
+Africa,Sierra Leone,-1.2,-7,2014,7354,2392,1805,7354,2392,EBOLA
+Africa,Sierra Leone,-1.2,-7,2015,8704,3589,5131,1350,1197,EBOLA
+North America,United States of America,-5.6,-5.5,2014,4,1,0,4,1,EBOLA
+North America,United States of America,-5.6,-5.5,2015,4,1,0,0,0,EBOLA
