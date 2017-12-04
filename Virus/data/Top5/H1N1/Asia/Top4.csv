@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Viet Nam,2009,6,1,1,0,,1,0
+H1N1,Viet Nam,2009,6,8,9,0,,6,0
+H1N1,Viet Nam,2009,6,15,25,0,,2,0
+H1N1,Viet Nam,2009,6,22,35,0,,8,0
+H1N1,Viet Nam,2009,6,29,84,0,,21,0
+H1N1,Viet Nam,2009,7,6,181,0,,50,0
+,,,,,,,,,
+,,,,,,,,,

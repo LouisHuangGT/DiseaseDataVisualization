@@ -1,0 +1,11 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+SARS,Canada,2003,3,28,29,3,,,
+SARS,Canada,2003,4,5,74,7,,,
+SARS,Canada,2003,4,12,101,10,,3,
+SARS,Canada,2003,4,19,132,12,,6,
+SARS,Canada,2003,4,28,142,18,,0,
+SARS,Canada,2003,5,5,148,22,,0,
+SARS,Canada,2003,5,12,148,22,,0,
+SARS,Canada,2003,5,19,150,23,,1,
+SARS,Canada,2003,5,26,158,26,,8,
+SARS,Canada,2003,6,2,188,30,,29,

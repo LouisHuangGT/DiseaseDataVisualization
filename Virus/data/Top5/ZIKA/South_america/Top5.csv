@@ -1,0 +1,12 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+ZIKA,Peru,2016,11,17,143,0,0,,
+ZIKA,Peru,2016,12,15,154,0,898,,
+ZIKA,Peru,2017,1,18,389,0,1767,,
+ZIKA,Peru,2017,2,16,438,0,2474,,
+ZIKA,Peru,2017,3,16,903,0,1957,,
+ZIKA,Peru,2017,4,13,961,0,1827,,
+ZIKA,Peru,2017,5,18,1011,0,5155,,
+ZIKA,Peru,2017,6,15,1218,0,5874,,
+ZIKA,Peru,2017,7,13,1362,0,6380,,
+ZIKA,Peru,2017,8,17,1498,0,6370,,
+ZIKA,Peru,2017,9,14,1518,0,6474,,

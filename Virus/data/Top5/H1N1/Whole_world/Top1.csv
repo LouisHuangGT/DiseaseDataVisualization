@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,United States of America,2009,5,18,4714,4,,0,0
+H1N1,United States of America,2009,5,25,6552,9,,0,0
+H1N1,United States of America,2009,6,1,8975,15,,1048,4
+H1N1,United States of America,2009,6,8,13217,27,,2163,10
+H1N1,United States of America,2009,6,15,17855,45,,4638,18
+H1N1,United States of America,2009,6,22,21449,87,,3594,43
+H1N1,United States of America,2009,6,29,27717,127,,6268,40
+H1N1,United States of America,2009,7,6,33902,170,,0,0

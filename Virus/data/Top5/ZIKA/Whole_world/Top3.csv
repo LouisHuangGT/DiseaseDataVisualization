@@ -1,0 +1,12 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+ZIKA,PuertoRico,2016,11,17,33455,5,0,,1
+ZIKA,PuertoRico,2016,12,15,35136,5,0,,1
+ZIKA,PuertoRico,2017,1,18,37488,5,0,,1
+ZIKA,PuertoRico,2017,2,16,38461,5,0,,1
+ZIKA,PuertoRico,2017,3,16,39529,5,0,,1
+ZIKA,PuertoRico,2017,4,13,39839,5,0,,
+ZIKA,PuertoRico,2017,5,18,40140,5,0,,
+ZIKA,PuertoRico,2017,6,15,40398,5,0,,
+ZIKA,PuertoRico,2017,7,13,40383,5,0,,
+ZIKA,PuertoRico,2017,8,17,40545,5,0,,
+ZIKA,PuertoRico,2017,9,14,40576,5,0,,

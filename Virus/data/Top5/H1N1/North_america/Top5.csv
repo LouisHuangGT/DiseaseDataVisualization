@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,El Salvador,2009,5,18,4,0,,0,0
+H1N1,El Salvador,2009,5,25,6,0,,0,0
+H1N1,El Salvador,2009,6,1,27,0,,16,0
+H1N1,El Salvador,2009,6,8,69,0,,20,0
+H1N1,El Salvador,2009,6,15,95,0,,26,0
+H1N1,El Salvador,2009,6,22,160,0,,0,0
+H1N1,El Salvador,2009,6,29,226,0,,66,0
+H1N1,El Salvador,2009,7,6,319,0,,66,0

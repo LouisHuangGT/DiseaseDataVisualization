@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,France,2009,5,18,14,0,,0,0
+H1N1,France,2009,5,25,16,0,,0,0
+H1N1,France,2009,6,1,24,0,,3,0
+H1N1,France,2009,6,8,58,0,,11,0
+H1N1,France,2009,6,15,80,0,,7,0
+H1N1,France,2009,6,22,147,0,,16,0
+H1N1,France,2009,6,29,235,0,,44,0
+H1N1,France,2009,7,6,310,0,,10,0

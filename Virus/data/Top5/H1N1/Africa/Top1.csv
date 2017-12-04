@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Egypt,2009,6,8,1,0,,0,0
+H1N1,Egypt,2009,6,15,18,0,,8,0
+H1N1,Egypt,2009,6,22,39,0,,10,0
+H1N1,Egypt,2009,6,29,50,0,,7,0
+H1N1,Egypt,2009,7,6,78,0,,11,0
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,

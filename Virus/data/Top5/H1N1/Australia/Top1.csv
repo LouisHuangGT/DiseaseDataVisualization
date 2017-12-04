@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Australia,2009,5,18,1,0,,0,0
+H1N1,Australia,2009,5,25,16,0,,4,0
+H1N1,Australia,2009,6,1,297,0,,150,0
+H1N1,Australia,2009,6,8,1051,0,,175,0
+H1N1,Australia,2009,6,15,1823,0,,516,0
+H1N1,Australia,2009,6,22,2436,1,,237,1
+H1N1,Australia,2009,6,29,4038,7,,758,4
+H1N1,Australia,2009,7,6,5298,10,,730,1

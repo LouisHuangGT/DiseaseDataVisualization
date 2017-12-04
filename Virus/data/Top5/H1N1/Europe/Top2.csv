@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Spain,2009,5,18,103,0,,0,0
+H1N1,Spain,2009,5,25,133,0,,7,0
+H1N1,Spain,2009,6,1,178,0,,35,0
+H1N1,Spain,2009,6,8,291,0,,73,0
+H1N1,Spain,2009,6,15,488,0,,0,0
+H1N1,Spain,2009,6,22,522,0,,10,0
+H1N1,Spain,2009,6,29,541,0,,0,0
+H1N1,Spain,2009,7,6,776,1,,16,0

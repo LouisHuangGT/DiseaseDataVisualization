@@ -1,0 +1,6 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Nicaragua,2009,6,8,18,0,,13,0
+H1N1,Nicaragua,2009,6,15,56,0,,0,0
+H1N1,Nicaragua,2009,6,22,189,0,,45,0
+H1N1,Nicaragua,2009,6,29,277,0,,12,0
+H1N1,Nicaragua,2009,7,6,321,0,,13,0

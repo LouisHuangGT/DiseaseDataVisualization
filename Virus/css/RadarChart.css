@@ -2,6 +2,11 @@
 	font-family: sans-serif;
 	fill: gray;
 }
+
+.legend_month {
+	font-family: sans-serif;
+	fill: gray;
+}
 			
 
 .Radar_tooltip {
@@ -10,10 +15,13 @@
 	radius: 5px;
 	shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 	pointer-events: none;
+	rx: 10px;
+	ry: 10px;
 }
 
 .Radar_tooltext {
-	fill: #4F4F4F;
+	/*fill: #4F4F4F;*/
+	fill: #ffffff;
 	margin: 0;
 	font-family: sans-serif;
 	font-size: 10px;
@@ -26,10 +34,12 @@
 	radius: 5px;
 	shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 	pointer-events: none;
+	rx: 10px;
+	ry: 10px;
 }
 
 .Map_tooltext {
-	fill: #4F4F4F;
+	fill: #ffffff;
 	margin: 0;
 	font-family: sans-serif;
 	font-size: 10px;

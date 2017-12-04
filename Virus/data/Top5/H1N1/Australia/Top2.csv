@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,New Zealand,2009,5,18,9,0,,0,0
+H1N1,New Zealand,2009,5,25,9,0,,0,0
+H1N1,New Zealand,2009,6,1,9,0,,0,0
+H1N1,New Zealand,2009,6,8,14,0,,3,0
+H1N1,New Zealand,2009,6,15,86,0,,59,0
+H1N1,New Zealand,2009,6,22,258,0,,42,0
+H1N1,New Zealand,2009,6,29,587,0,,134,0
+H1N1,New Zealand,2009,7,6,1059,3,,147,3

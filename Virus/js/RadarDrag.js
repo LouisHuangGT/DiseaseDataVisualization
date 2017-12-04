@@ -47,7 +47,22 @@ PlateBig_drag.on("dragend", function () {
 					.style("fill-opacity", function(d) { if ( (d.year>=MinYear && d.year<MaxYear)
 														&& (d.Continent==G_ContinentName || G_ContinentName=='overview') 
 														&& (d.type==G_DieaseName || G_DieaseName=='overview') 
-														) return 1; return 0;});
+														) return 0.8; return 0;});
+
+	d3.selectAll(".Little_radarArea_"+G_DieaseName).transition().duration(1000)
+		.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
+											if ( (year>=MinYear && year<MaxYear)
+											&& (G_ContinentName==d3.select(this).attr('continent'))  
+											) return d3.select(this).attr('opa'); return 0;})
+		.style("stroke-width", function(d) { var year = d3.select(this).attr('year');
+											if ( (year>=MinYear && year<MaxYear)
+											&& (G_ContinentName==d3.select(this).attr('continent'))  
+											) return "1.5px"; return "0px";});
+	d3.selectAll(".Little_radarText_"+G_DieaseName).transition().duration(1000)
+		.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
+											if ( (year>=MinYear && year<MaxYear)
+											&& (G_ContinentName==d3.select(this).attr('continent'))  
+											) return 1.0; return 0;});
 
 });
 
@@ -75,10 +90,29 @@ PlateSmall_drag.on("drag", function () {
 	}
 });
 
+function ShowPage(i){
+	if (i==1){
+		window.location.reload();
+	}
+
+}
+
 PlateSmall_drag.on("dragend", function () {
 	SeondPage = true;
 	var k = Math.floor(((Math.floor(DegreeSmall) % 360) + 360) % 360 / 90)+1;
+
 	var Diease_icon = ["overview","zika","ebola","h1n1","sars"];
+	var Diease_name2 = ["","ZIKA","EBOLA","H1N1","SARS"];
+
+	// change slider
+	if (Diease_name2[k]=="ZIKA") G_color = "#8b7cf1";
+	if (Diease_name2[k]=="EBOLA") G_color = "#30ffe8";
+	if (Diease_name2[k]=="H1N1") G_color = "#ffd930";
+	if (Diease_name2[k]=="SARS") G_color = "#eb6e6e";
+	d3.select("#Scale_slider").style("opacity", 1.0);
+	d3.select("#Scale_slider").select("#handle-two").style("background", G_color);
+	d3.select("#Scale_slider").select(".d3-slider-range").style("background", G_color);
+
 	d3.select("#center_img")
 		.attr("href","image/"+Diease_icon[k]+"_icon.png");
 	d3.select("#white_small")
@@ -86,15 +120,26 @@ PlateSmall_drag.on("dragend", function () {
 		.style("opacity", 1.0);
 
 	//hide header
-	d3.selectAll(".LT_head")
-		.style("opacity", 0);
+	LT_g.selectAll(".LT_head").transition().duration(1000).style('opacity', 0);
+	LT_g.select("#legend_img").transition().duration(1000).style('opacity', 0);
+	LT_g.select("#L1_img").transition().duration(1000).attr("href","image/L1_"+Diease_name2[k]+".jpeg").style('opacity', 1);
+	LT_g.select("#L2_img").transition().duration(1000).attr("href","image/L2_"+Diease_name2[k]+".jpeg").style('opacity', 1);
+	LT_g.selectAll(".Key_text").remove();
+	LT_g.selectAll(".Key_date").remove();
+	LT_g.selectAll(".Key_circle").remove();
+	// d3.selectAll(".LT_head")
+	// 	.style("opacity", 0);
+	// d3.select("#legend_img")
+	// 	.style("opacity", 0);
+
 	//wordle
-	Wordle(k);
+	// Wordle(k);
+
 	//ArcBar
-	showRadialProgress(k);
+	// showRadialProgress(k);
 	//symptom
-	d3.selectAll("#symptom_img").transition().duration(1000)
-		.style("opacity", 1.0);
+	// d3.selectAll("#symptom_img").transition().duration(1000)
+	// 	.style("opacity", 1.0);
 	//little Radar Charts
 	d3.selectAll("#Little_Radar").transition().duration(1000)
 		.style("opacity", 1.0);
@@ -105,7 +150,7 @@ PlateSmall_drag.on("dragend", function () {
 					.style("fill-opacity", function(d) { if ( (d.year>=MinYear && d.year<MaxYear)
 														&& (d.Continent==G_ContinentName || G_ContinentName=='overview') 
 														&& (d.type==G_DieaseName || G_DieaseName=='overview') 
-														) return 1; return 0;});
+														) return 0.8; return 0;});
 
 
 
@@ -141,20 +186,34 @@ PlateSmall_drag.on("dragend", function () {
 		.text(function(d, i){ return d.month;});
 
 	var Diease_name = ["overview","ZIKA","EBOLA","H1N1","SARS"];
-	d3.selectAll("#radarArea")
-		.transition().duration(1000)
+	d3.selectAll("#radarArea").attr("transform", "translate(" + 999 + "," + 0 + ")");
+	d3.selectAll("#radarArea").transition().duration(1000)
 		.style("fill-opacity", 0)	
 		.style("stroke-width", 0 + "px");
+
+	d3.selectAll(".radarArea_"+Diease_name[k]).attr("transform", "translate(" + 0 + "," + 0 + ")");
 	d3.selectAll(".radarArea_"+Diease_name[k])
 		.transition().duration(1000)
-		.style("fill-opacity", 0.35)	
+		.style("fill-opacity", function(d) { return d3.select(this).attr('opa');})	
 		.style("stroke-width", 1.5 + "px");
 
-	d3.selectAll(".Little_radarArea_"+Diease_name[(k%4)+1])
-		.transition().duration(1000)
-		// .style("fill-opacity", 0.35)	
-		.style("stroke-width", 1.5 + "px");
-		
+	d3.selectAll(".Little_radarArea_"+Diease_name[k]).attr("transform", "translate(" + 0 + "," + 0 + ")");
+	d3.selectAll(".Little_radarArea_"+G_DieaseName).transition().duration(1000)
+		.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
+											if ( (year>=MinYear && year<MaxYear)
+											&& (G_ContinentName==d3.select(this).attr('continent'))  
+											) return d3.select(this).attr('opa'); return 0;})
+		.style("stroke-width", function(d) { var year = d3.select(this).attr('year');
+											if ( (year>=MinYear && year<MaxYear)
+											&& (G_ContinentName==d3.select(this).attr('continent'))  
+											) return "1.5px"; return "0px";});
+
+	d3.selectAll(".Little_radarText_"+Diease_name[k]).attr("transform", "translate(" + 0 + "," + 0 + ")");
+	d3.selectAll(".Little_radarText_"+G_DieaseName).transition().duration(1000)
+		.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
+											if ( (year>=MinYear && year<MaxYear)
+											&& (G_ContinentName==d3.select(this).attr('continent'))  
+											) return 1.0; return 0;});
 
 	d3.selectAll(".radarCircle")
 			.transition().duration(1000)

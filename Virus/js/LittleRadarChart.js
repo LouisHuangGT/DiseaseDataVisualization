@@ -2,7 +2,7 @@ LittleRadarChart(Math.min(Radar_width/4.5, Radar_height/4.5), 0.91, 0.2, 1);
 LittleRadarChart(Math.min(Radar_width/9, Radar_height/9), 0.81, 0.6, 2);
 LittleRadarChart(Math.min(Radar_width/9, Radar_height/9), 0.95, 0.6, 3);
 LittleRadarChart(Math.min(Radar_width/9, Radar_height/9), 0.81, 0.88, 4);
-LittleRadarChart(Math.min(Radar_width/9, Radar_height/9), 0.95, 0.88), 5;
+LittleRadarChart(Math.min(Radar_width/9, Radar_height/9), 0.95, 0.88, 5);
 
 function LittleRadarChart(radius, height_ratio, width_ratio, num)
 {
@@ -65,10 +65,10 @@ function LittleRadarChart(radius, height_ratio, width_ratio, num)
 
 	//radial line
 	var rLine = new Array();
-	rLine[1] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 622482]);	//H1N1
-	rLine[2] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 8437]);	//SARS
-	rLine[3] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 581685]);	//ZIKA
-	rLine[4] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 15249]);
+	rLine[1] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 33902]);	//H1N1
+	rLine[2] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 5328]);	//SARS
+	rLine[3] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 231725]);	//ZIKA
+	rLine[4] = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, 8704]);	//EBOLA
 
 	var clip_arc = d3.svg.arc()
 		.innerRadius(radius*(2/3+1/36))
@@ -81,46 +81,91 @@ function LittleRadarChart(radius, height_ratio, width_ratio, num)
 		.append("path")
 		.attr("d", clip_arc);
 
-	drawLittleRadialLine(H1N1_Line_data, 'H1N1', rLine[1], g, total_angle / 12, angle_diff, num);	//H1N1
-	drawLittleRadialLine(SARS_Line_data, 'SARS', rLine[2], g, total_angle / 12, angle_diff, num);	//SARS
-	drawLittleRadialLine(ZIKA_Line_data, 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num);	//ZIKA
-	drawLittleRadialLine(EBOLA_Line_data, 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, num);	//EBOLA
+
+	var ContinentName = ["Whole_world","Africa","Europe","Asia","Australia","South_America","North_America"];
+	for (var i = 0; i < 7; i++){
+		drawLittleRadialLine(ContinentName[i], 'H1N1', rLine[1], g, total_angle / 12, angle_diff, num, 0);	//H1N1
+		drawLittleRadialLine(ContinentName[i], 'H1N1', rLine[1], g, total_angle / 12, angle_diff, num, 1);	//H1N1
+		drawLittleRadialLine(ContinentName[i], 'SARS', rLine[2], g, total_angle / 12, angle_diff, num, 6);	//SARS
+		drawLittleRadialLine(ContinentName[i], 'SARS', rLine[2], g, total_angle / 12, angle_diff, num, 7);	//SARS
+		drawLittleRadialLine(ContinentName[i], 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num, 3);	//ZIKA
+		drawLittleRadialLine(ContinentName[i], 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num, 4);	//ZIKA
+		drawLittleRadialLine(ContinentName[i], 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num, 5);	//ZIKA
+		drawLittleRadialLine(ContinentName[i], 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, num, 9);	//EBOLA
+		drawLittleRadialLine(ContinentName[i], 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, num, 10);	//EBOLA
+		drawLittleRadialLine(ContinentName[i], 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, num, 11);	//EBOLA
+	}
+
 
 }
 
-function drawLittleRadialLine(Data, name, rLine, g, avg_angle, angle_diff, num){
-	var radarLine = d3.svg.line.radial()
-		.interpolate("linear")
-		.radius(function(d, i) { return i==0 ? 0 :rLine(d.value); })
-		.angle(function(d, i) { return i==0 ? 0 : (d.month-1)*avg_angle - angle_diff + avg_angle/31*d.day + Math.PI/2; });
-	
-	var blobWrapper = g.selectAll(".radialLine_"+name)
-		.data(Data)
-		.enter().append("g")
-		.attr("class", "radialLine_"+name);
+function drawLittleRadialLine(continent, name, rLine, g, avg_angle, angle_diff, num, k){
+	var Line_color = ["#ffffff","#ffe35e","#867313", "#ffffff","#a497ff", "#5e4dd8", "#ffffff","#f16565", "#ba0100", "#ffffff","#30ffe8", "#147469","#ffffff"];
+	var Line_opacity = [0.65, 0.65, 0.34];
+	var ts = 10;
+	var Text_size = [0, ts*2, ts, ts, ts, ts];
+	var Text_left = [0, 4,2,2,2,2]
+	d3.csv("data/Top5/"+name+"/"+continent+"/"+"Top"+num+".csv", function(error, data) {
+		if (error) {return;}
 
-	blobWrapper.append("path")
-		.attr("id", "radarArea")
-		.attr("class", "Little_radarArea_"+name)
-		.attr("clip-path", "url(#Little_Line_clip_"+num+")")
-		.attr("d", function(d, i) { return radarLine(d); })
-		.style("fill", function(d, i) { return Dot_color[d[i].index]; })
-		.style("fill-opacity", 0)	
-		.style("stroke-width", 1.5 + "px")
-		.style("stroke", function(d, i) { return Dot_color[d[i].index]; })
-		.on('mouseover', function(d, i){
-			if (d3.select(this).style("fill-opacity") > 0){
-				d3.select(this)
-					.transition().duration(300)
-					.style("fill-opacity", 0.7);	
-			}
-		})
-		.on('mouseout', function(d,i){
-			if (d3.select(this).style("fill-opacity") > 0){
-				d3.select(this)
-					.transition().duration(300)
-					.style("fill-opacity", 0);
-			}
-		});
+		if (continent == 'Whole_world') continent = 'overview';
+		if (continent == 'South_America') continent = 'South America';
+		if (continent == 'North_America') continent = 'North America';
+		
+		var count = 0;
+		var radarLine = d3.svg.line.radial()
+			.interpolate("linear")
+			.radius(function(d) { 
+				count = count + 1;
+				if (count == 1) return 0;
+				if (k%3==0) return rLine(d.cal_case);
+				else if (k%3==1) return rLine(d.cal_death);
+				else return rLine(d.suspect);
+			 })
+			.angle(function(d) { return (d.month-1)*avg_angle - angle_diff + avg_angle/31*d.day + Math.PI/2; });
+		
+		var blobWrapper = g.append("g")
+			.data(data)
+			.attr("class", "radialLine_"+name);
 
+		blobWrapper.append('text')
+			.text(function(d) { return d.country; })
+			.attr("id", "radarArea")
+			.attr('x', function(d) { return -d.country.length*Text_left[num]; })
+			.attr("class", "Little_radarText_"+name)
+			.style('font-size', Text_size[num])
+			.attr("year", function(d) { return d.year; })
+			.attr("continent", continent)
+			.style('fill', 'white')
+			.style('fill-opacity', 0.0);
+
+		blobWrapper.append("path")
+			.attr("id", "radarArea")
+			.attr("class", "Little_radarArea_"+name)
+			.attr("clip-path", "url(#Little_Line_clip_"+num+")")
+			.attr("d", function(d) { return radarLine(data); })
+			.attr("year", function(d) { return d.year; })
+			.attr("continent", continent)
+			.attr("name", name+num)
+			.attr("opa", function(d) { return Line_opacity[k%3]; })
+			.style("fill", function(d) { return Line_color[1+k]; })
+			.style("fill-opacity", 0.0)	
+			.style("stroke-width", 0.0 + "px")
+			.style("stroke", function(d) { return Line_color[1+k]; })
+			.on('mouseover', function(d){
+				if (d3.select(this).style("fill-opacity") > 0){
+					d3.select(this)
+						.transition().duration(300)
+						.style("fill-opacity", 1.0);	
+				}
+			})
+			.on('mouseout', function(d,i){
+				if (d3.select(this).style("fill-opacity") > 0){
+					d3.select(this)
+						.transition().duration(300)
+						.style("fill-opacity", d3.select(this).attr('opa'));
+				}
+			});
+
+	});
 }
