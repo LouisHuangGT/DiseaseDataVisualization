@@ -131,7 +131,7 @@ window.onscroll = function()
 	var t = document.documentElement.scrollTop || document.body.scrollTop;
     //console.log(t);
 	
-	if(t >= 550 && !flag)
+	if(t >= 540 && !flag)
 	{
 		flag = true;
 		var appearAnimeTime = 1000;
@@ -191,7 +191,7 @@ var tips_rect = svgContainer.append("rect")
 			.style("opacity",0);
 
 var tips_text = svgContainer.append("text")
-	.attr("x",466)
+	.attr("x",475)
     .attr("y",368)
     .text("hover upon circles to see fatality number & breakout regions")
     .style("font-family","Avenir")
@@ -321,6 +321,57 @@ function render(data)
 }
 
 
+var AppearDelta;
+var backAlpha = 0;
+function AppearAnimation(animetime)
+{
+	AppearDelta = animetime / 10;
+    var timer = setInterval(alphaIncrease,10);
+	if(backAlpha >= 1)
+		clearInterval(timer);
+	
+}
+function alphaIncrease()
+{
+	backAlpha += 1 / AppearDelta;
+	if(backAlpha >= 1)
+		backAlpha = 1;
+
+	d3.select(backImage[0][0]).style("opacity",backAlpha);	
+	for(var i = 0; i < 6; i++)
+	{
+		d3.select(texts[0][i]).style("opacity",backAlpha);	
+		d3.select(rects[0][i]).style("opacity",backAlpha);		
+	}
+}
+
+var alpha_rect = 0;
+var alpha_text = 0;
+var rect_helper = 0.21;
+var text_helper = 1;
+function TipsBlinkAnimation(animetime)
+{
+	//AppearDelta = animetime / 10;
+    var timer = setInterval(TipsAlphaChange,10);
+	
+}
+function TipsAlphaChange()
+{
+	alpha_rect += rect_helper / AppearDelta;
+	alpha_text += text_helper / AppearDelta
+	
+	if(alpha_text >= 1 || alpha_text <= 0)
+	{
+		rect_helper *= -1;	
+		text_helper *= -1;
+	}
+   
+	d3.select(tips_rect[0][0]).style("opacity",alpha_rect);	
+    d3.select(tips_text[0][0]).style("fill-opacity",alpha_text);	
+	
+}
+
+
 var CircleAnimeDelta;
 var t_record = 0;
 function CircleInsertAnimation(animetime)
@@ -371,53 +422,4 @@ function CircleMove()
 	
 	
 		
-}
-var AppearDelta;
-var backAlpha = 0;
-function AppearAnimation(animetime)
-{
-	AppearDelta = animetime / 10;
-    var timer = setInterval(alphaIncrease,10);
-	if(backAlpha >= 1)
-		clearInterval(timer);
-	
-}
-function alphaIncrease()
-{
-	backAlpha += 1 / AppearDelta;
-	if(backAlpha >= 1)
-		backAlpha = 1;
-
-	d3.select(backImage[0][0]).style("opacity",backAlpha);	
-	for(var i = 0; i < 6; i++)
-	{
-		d3.select(texts[0][i]).style("opacity",backAlpha);	
-		d3.select(rects[0][i]).style("opacity",backAlpha);		
-	}
-}
-
-var alpha_rect = 0;
-var alpha_text = 0;
-var rect_helper = 0.21;
-var text_helper = 1;
-function TipsBlinkAnimation(animetime)
-{
-	//AppearDelta = animetime / 10;
-    var timer = setInterval(TipsAlphaChange,10);
-	
-}
-function TipsAlphaChange()
-{
-	alpha_rect += rect_helper / AppearDelta;
-	alpha_text += text_helper / AppearDelta
-	
-	if(alpha_text >= 1 || alpha_text <= 0)
-	{
-		rect_helper *= -1;	
-		text_helper *= -1;
-	}
-   
-	d3.select(tips_rect[0][0]).style("opacity",alpha_rect);	
-    d3.select(tips_text[0][0]).style("fill-opacity",alpha_text);	
-	
 }
