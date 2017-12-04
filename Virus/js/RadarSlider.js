@@ -29,7 +29,7 @@ function RadarSlider(){
 					.attr("y2", function(d){ return radius * Math.sin(avg_angle*(d.year-value[0]) - angle_diff); })
 					.style("stroke-width", function(d) { if (d.year>=value[0] && d.year<=value[1]) return "1px"; return "0px"});	
 
-				Radar_transition.selectAll("text")
+				Radar_transition.selectAll(".legend")
 					.attr("x", function(d){ return radius * 1.05 * Math.cos(avg_angle*(d.year-value[0]) - angle_diff + avg_angle/2); })
 					.attr("y", function(d){ return radius * 1.05 * Math.sin(avg_angle*(d.year-value[0]) - angle_diff + avg_angle/2); })
 					.style("font-size", function(d) { if (d.year>=value[0] && d.year<value[1] && d.year!="2018") return "12px"; return "0px"});
@@ -50,12 +50,66 @@ function RadarSlider(){
 					.style("fill-opacity", function(d) { if ( (d.year>=MinYear && d.year<MaxYear)
 														&& (d.Continent==G_ContinentName || G_ContinentName=='overview') 
 														&& (d.type==G_DieaseName || G_DieaseName=='overview') 
-														) return 1; return 0;});
+														) return 0.8; return 0;});
+				d3.selectAll("#radarArea").transition().duration(1000)
+					.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
+														if ( (year>=MinYear && year<MaxYear)
+														&& (G_ContinentName=='overview') 
+														&& (G_DieaseName==d3.select(this).attr('name')) 
+														) return d3.select(this).attr('opa'); return 0;})
+					.style("stroke-width", function(d) { var year = d3.select(this).attr('year');
+														if ( (year>=MinYear && year<MaxYear)
+														&& (G_ContinentName=='overview') 
+														&& (G_DieaseName==d3.select(this).attr('name')) 
+														) return "1.5px"; return "0px";});
+
+				d3.selectAll(".Little_radarArea_"+G_DieaseName).transition().duration(1000)
+					.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
+														if ( (year>=MinYear && year<MaxYear)
+														&& (G_ContinentName==d3.select(this).attr('continent'))  
+														) return d3.select(this).attr('opa'); return 0;})
+					.style("stroke-width", function(d) { var year = d3.select(this).attr('year');
+														if ( (year>=MinYear && year<MaxYear)
+														&& (G_ContinentName==d3.select(this).attr('continent'))  
+														) return "1.5px"; return "0px";});
+				d3.selectAll(".Little_radarText_"+G_DieaseName).transition().duration(1000)
+					.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
+														if ( (year>=MinYear && year<MaxYear)
+														&& (G_ContinentName==d3.select(this).attr('continent'))  
+														) return 1.0; return 0;});
 
 				}
 				)
 			);
 }
+
+
+ScaleSlider();
+function ScaleSlider(){
+	d3.select("body")
+		.append("div")
+		.attr("id","Scale_slider")
+		.style("left", Radar_margin.left*1.03 + "px")
+		.style("top", Radar_height/5*3 + Radar_margin.top + Radar_margin.bottom*2.75 + "px")
+		.style("width", Radar_width*0.15 + "px")
+		.style("opacity", 0)
+		.call(d3.slider()
+			.min(0).max(100)
+			.value([0, 100])
+			.step(1)
+			.on("slide", function(evt, value) {
+				var scale = 100-value[1]+1;
+				console.log(scale);
+				// d3.selectAll(".radarArea_"+G_DieaseName)
+				// 	.attr("d", function(d){ console.log(d3.select(this).attr("d"));return d3.select(this).attr("d")*scale;})
+
+				}
+				)
+			);
+	d3.select("#Scale_slider").select("#handle-one").style("opacity", 0);
+}
+
+
 
 //update
 function RadarSlider_update(l,r){

@@ -1,0 +1,11 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+SARS,Germany ,2003,3,28,4,0,,,
+SARS,Germany ,2003,4,5,5,0,,,
+SARS,Germany ,2003,4,12,6,0,,0,
+SARS,Germany ,2003,4,19,6,0,,0,
+SARS,Germany ,2003,4,28,7,0,,1,
+SARS,Germany ,2003,5,5,7,0,,0,
+SARS,Germany ,2003,5,12,9,0,,2,
+SARS,Germany ,2003,5,19,9,0,,0,
+SARS,Germany ,2003,5,26,9,0,,0,
+SARS,Germany ,2003,6,2,10,1,,0,

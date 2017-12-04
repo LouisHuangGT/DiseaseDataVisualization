@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,"Korea, Republic of",2009,5,18,3,0,,0,0
+H1N1,"Korea, Republic of",2009,5,25,3,0,,0,0
+H1N1,"Korea, Republic of",2009,6,1,33,0,,0,0
+H1N1,"Korea, Republic of",2009,6,8,47,0,,6,0
+H1N1,"Korea, Republic of",2009,6,15,65,0,,12,0
+H1N1,"Korea, Republic of",2009,6,22,105,0,,21,0
+H1N1,"Korea, Republic of",2009,6,29,202,0,,60,0
+H1N1,"Korea, Republic of",2009,7,6,202,0,,0,0

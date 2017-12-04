@@ -1,0 +1,12 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+ZIKA,Mexico,2016,11,17,6474,0,0,,
+ZIKA,Mexico,2016,12,15,6921,0,0,,
+ZIKA,Mexico,2017,1,18,7599,0,0,,
+ZIKA,Mexico,2017,2,16,7860,0,0,,
+ZIKA,Mexico,2017,3,16,8127,0,0,,
+ZIKA,Mexico,2017,4,13,8323,0,0,,
+ZIKA,Mexico,2017,5,18,8735,0,0,,
+ZIKA,Mexico,2017,6,15,8821,0,0,,
+ZIKA,Mexico,2017,7,13,8974,0,0,,
+ZIKA,Mexico,2017,8,17,9290,0,0,,
+ZIKA,Mexico,2017,9,14,9724,0,0,,

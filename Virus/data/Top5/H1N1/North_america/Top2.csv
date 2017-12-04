@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Canada,2009,5,18,496,1,,0,0
+H1N1,Canada,2009,5,25,805,1,,86,0
+H1N1,Canada,2009,6,1,1336,2,,218,0
+H1N1,Canada,2009,6,8,2115,3,,320,0
+H1N1,Canada,2009,6,15,2978,4,,0,0
+H1N2,Canada,2009,6,22,5710,13,,805,1
+H1N3,Canada,2009,6,29,7775,21,,1043,2
+H1N4,Canada,2009,7,6,7983,25,,0,0

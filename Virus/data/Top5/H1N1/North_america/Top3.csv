@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Panama,2009,5,18,54,0,,0,0
+H1N1,Panama,2009,5,25,76,0,,0,0
+H1N1,Panama,2009,6,1,107,0,,0,0
+H1N1,Panama,2009,6,8,179,0,,6,0
+H1N1,Panama,2009,6,15,272,0,,51,0
+H1N1,Panama,2009,6,22,330,0,,58,0
+H1N1,Panama,2009,6,29,403,0,,45,0
+H1N1,Panama,2009,7,6,417,0,,0,0

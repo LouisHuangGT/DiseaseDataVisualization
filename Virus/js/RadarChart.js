@@ -1,4 +1,4 @@
-var Radar_margin = {top: 50, right: 410, bottom: 10, left: 350},
+var Radar_margin = {top: 50, right: 410, bottom: 10, left: 550},
 	Radar_width = 250 * 3,
 	Radar_height = 270 * 3,
 	radius = Math.min(Radar_width/2, Radar_height/2);
@@ -7,8 +7,9 @@ var Radar_margin = {top: 50, right: 410, bottom: 10, left: 350},
 var Radar_color = d3.scale.ordinal()
 	.range(["#00C5CD","80c269"]);
 // var Dot_color = ["","#00C5CD", "#f6ce63", "f1a6a6", "80c269"];
-var Dot_color = ["","#eb6e6e", "#30ffe8", "ffd930", "8b7cf1"];
+var Dot_color = ["","#ffd930", "#8b7cf1", "eb6e6e", "30ffe8"];
 var Diease_name = ["","H1N1","ZIKA","SARS","EBOLA"];
+var G_color = "#ffd930";
 
 RadarCharRun();
 
@@ -107,14 +108,22 @@ function RadarCharRun()
 		.style("x",-Radar_width/20*3/2)
 		.style("y",-Radar_height/20*3/2)
 		.style("z-index",-1);
+	// g.append("image")
+	// 	.attr("id", "symptom_img")
+	// 	.attr("href","image/symptoms.jpeg")
+	// 	.style("height",Radar_height)
+	// 	.style("x",Radar_width*0.6)
+	// 	.style("y",-Radar_height*0.5)
+	// 	.style("z-index",-1)
+	// 	.style("opacity", 0);
 	g.append("image")
-		.attr("id", "symptom_img")
-		.attr("href","image/symptoms.jpeg")
-		.style("height",Radar_height)
-		.style("x",Radar_width*0.6)
-		.style("y",-Radar_height*0.5)
-		.style("z-index",-1)
-		.style("opacity", 0);
+		.attr("id", "tip1")
+		.attr("href","image/tip1.jpg")
+		.style("height",Radar_height/4.5)
+		.style("width",Radar_width/4.5)
+		.style("x",Radar_width*0.073)
+		.style("y",-Radar_height/12)
+		.style("z-index",-1);
 
 	var axisGrid = g.append("g").attr("class", "axisWrapper")
 					.attr("id", "Radar_axis");
@@ -152,6 +161,14 @@ function RadarCharRun()
 		.attr("x", function(d, i){ return radius * 1.05 * Math.cos(avg_angle*i - angle_diff + avg_angle/2); })
 		.attr("y", function(d, i){ return radius * 1.05 * Math.sin(avg_angle*i - angle_diff + avg_angle/2); })
 		.text(function(d){ return d.year;});
+	axis.append("text")
+		.attr("class", "legend_month")
+		.style("font-size", function(d, i){ if (d.month!=1) return"8px"; return "0px";})
+		.attr("text-anchor", "middle")
+		.attr("dy", "0.35em")
+		.attr("x", function(d, i){ return 0; })
+		.attr("y", function(d, i){ return -radius / 36 * (i + 25); })
+		.text(function(d){ return d.month;});
 
 	//radial line
 	var rLine = new Array();
@@ -171,10 +188,10 @@ function RadarCharRun()
 		.append("path")
 		.attr("d", clip_arc);
 
-	drawRadialLine(H1N1_Line_data, 'H1N1', rLine[1], g, total_angle / 12, angle_diff);	//H1N1
-	drawRadialLine(SARS_Line_data, 'SARS', rLine[2], g, total_angle / 12, angle_diff);	//SARS
-	drawRadialLine(ZIKA_Line_data, 'ZIKA', rLine[3], g, total_angle / 12, angle_diff);	//ZIKA
-	drawRadialLine(EBOLA_Line_data, 'EBOLA', rLine[4], g, total_angle / 12, angle_diff);	//EBOLA
+	drawRadialLine(H1N1_Line_data, 'H1N1', rLine[1], g, total_angle / 12, angle_diff, 0);	//H1N1
+	drawRadialLine(SARS_Line_data, 'SARS', rLine[2], g, total_angle / 12, angle_diff, 6);	//SARS
+	drawRadialLine(ZIKA_Line_data, 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, 3);	//ZIKA
+	drawRadialLine(EBOLA_Line_data, 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, 9);	//EBOLA
 
 	
 	drawDots(g, H1N1_data, month_ratio, rScale, 1);
@@ -214,9 +231,24 @@ function RadarCharRun()
 		.style("cursor", "pointer")
 		.style("z-index",2)
 		.call(PlateSmall_drag);
+
+	g.append("circle")
+		.style("r",Radar_width/20*3/2/3*2/5*2.5)
+		.style("cx",0)
+		.style("cy",0)
+		.style("opacity", 0.0)
+		.style("fill", "blue")
+		.style("cursor", "pointer")
+		.style("z-index",2)
+		.on('click', function(d){
+			ShowPage(1);
+		}
+			);
 }
 
-function drawRadialLine(Data, name, rLine, g, avg_angle, angle_diff){
+function drawRadialLine(Data, name, rLine, g, avg_angle, angle_diff, k){
+	var Line_color = ["#ffffff","#ffe35e","#867313", "#ffffff","#a497ff", "#5e4dd8", "#ffffff","#f16565", "#ba0100", "#ffffff","#30ffe8", "#147469","#ffffff"];
+	var Line_opacity = [0.65, 0.65, 0.34]
 	var radarLine = d3.svg.line.radial()
 		.interpolate("linear")
 		.radius(function(d, i) { return i==0 ? 0 :rLine(d.value); })
@@ -232,24 +264,28 @@ function drawRadialLine(Data, name, rLine, g, avg_angle, angle_diff){
 		.attr("class", "radarArea_"+name)
 		.attr("clip-path", "url(#Line_clip)")
 		.attr("d", function(d, i) { return radarLine(d); })
-		.style("fill", function(d, i) { return Dot_color[d[i].index]; })
+		.attr("year", function(d, i) { return d[i].year; })
+		.attr("name", name)
+		.attr("opa", function(d, i) { return Line_opacity[d[i].index-1]; })
+		.style("fill", function(d, i) { return Line_color[d[i].index+k]; })
 		.style("fill-opacity", 0.0)	
 		.style("stroke-width", 0.0 + "px")
-		.style("stroke", function(d, i) { return Dot_color[d[i].index]; })
+		.style("stroke", function(d, i) { return Line_color[d[i].index+k]; })
 		.on('mouseover', function(d, i){
 			if (d3.select(this).style("fill-opacity") > 0){
 				d3.select(this)
 					.transition().duration(300)
-					.style("fill-opacity", 0.7);	
+					.style("fill-opacity", 1.0);	
 			}
 		})
 		.on('mouseout', function(d,i){
 			if (d3.select(this).style("fill-opacity") > 0){
 				d3.select(this)
 					.transition().duration(300)
-					.style("fill-opacity", 0.35);
+					.style("fill-opacity", d3.select(this).attr('opa'));
 			}
-		});
+		})
+		;
 
 }
 
@@ -264,11 +300,19 @@ function drawDots(g, Data, month_ratio, rScale, k){
 	var tooltip = g.append("rect")
 		.attr("class", "Radar_tooltip")
 		.attr("width", 120)
-		.attr("height", 23)
-		.style("opacity", 0);
+		.attr("height", 35)
+		.style("opacity", 0)
+		.style('z-index', 5);
 	var tooltext = g.append("text")
 		.attr("class", "Radar_tooltext")
-		.style("opacity", 0);
+		.style("opacity", 0)
+		.attr('x', 999)
+		.style('z-index', 5);
+	var tooltext2 = g.append("text")
+		.attr("class", "Radar_tooltext")
+		.style("opacity", 0)
+		.attr('x', 999)
+		.style('z-index', 5);
 
 	var avg_angle = total_angle / 18,
 		angle_diff = Math.PI +  (total_angle - Math.PI)/2;
@@ -283,6 +327,7 @@ function drawDots(g, Data, month_ratio, rScale, k){
 		.attr("k", k)
 		.style("fill", Dot_color[k])
 		.style("fill-opacity", 0.8)
+		.style('z-index', 4)
 		.on("mouseover", function(d,i) {
 			if (d3.select(this).style("fill-opacity") > 0)
 			{
@@ -293,12 +338,19 @@ function drawDots(g, Data, month_ratio, rScale, k){
 				tooltext.attr('x', newX)
 					.attr('y', newY)
 					.transition().duration(200)
-					.text(Diease_name[k]+"\n"+d.year+"\n"+d.month+"\n"+d.value+"\n")
-					.style('opacity', 1.0);
+					.text(Diease_name[k]+", "+Month_index[d.month]+" "+d.year)
+					.style('text-align', 'left')
+					.style('opacity', 0.8);
+				tooltext2.attr('x', newX)
+					.attr('y', newY+12)
+					.transition().duration(200)
+					.text('Total infected:'+' '+d.value)
+					.style('text-align', 'left')
+					.style('opacity', 0.8);
 				tooltip.attr('x', newX-8)
 					.attr('y', newY-15)
 					.transition().duration(200)
-					.style('opacity', 1.0)
+					.style('opacity', 0.5)
 					.style('fill', d3.select(this).style("fill"));
 			}
 		})
@@ -311,21 +363,21 @@ function drawDots(g, Data, month_ratio, rScale, k){
 					.style("opacity", 0);
 				tooltext.transition().duration(200)
 					.style("opacity", 0);
+				tooltext2.transition().duration(200)
+					.style("opacity", 0);
+
+				tooltext.attr('x', 999);
+				tooltext2.attr('x', 999);
 			}
 		})
 		.on("click", function(d){
 			drawTip(k, d.year, d.month);
+			// if (d3.select(this).style("fill-opacity") >0)
+			// {
+			// 	d3.select(this).style("fill-opacity", 1.0);
+			// }
 		})
 		;
-}
-
-function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
-
-  return {
-    x: centerX + (radius * Math.cos(angleInRadians)),
-    y: centerY + (radius * Math.sin(angleInRadians))
-  };
 }
 
 function describeArc(x, y, radius, startAngle, endAngle){

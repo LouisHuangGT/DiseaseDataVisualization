@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Israel,2009,5,18,7,0,,0,0
+H1N1,Israel,2009,5,25,8,0,,1,0
+H1N1,Israel,2009,6,1,19,0,,8,0
+H1N1,Israel,2009,6,8,54,0,,15,0
+H1N1,Israel,2009,6,15,117,0,,49,0
+H1N1,Israel,2009,6,22,291,0,,72,0
+H1N1,Israel,2009,6,29,469,0,,64,0
+H1N1,Israel,2009,7,6,681,0,,104,0

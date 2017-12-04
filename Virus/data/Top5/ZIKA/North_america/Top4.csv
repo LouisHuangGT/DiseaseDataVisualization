@@ -1,0 +1,12 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+ZIKA,CostaRica,2016,11,17,1415,0,2563,,
+ZIKA,CostaRica,2016,12,15,1553,0,2723,,
+ZIKA,CostaRica,2017,1,18,1649,0,5737,,
+ZIKA,CostaRica,2017,2,16,1722,0,6049,,
+ZIKA,CostaRica,2017,3,16,1743,0,6131,,
+ZIKA,CostaRica,2017,4,13,1790,0,6249,,
+ZIKA,CostaRica,2017,5,18,1801,0,6344,,
+ZIKA,CostaRica,2017,6,15,1830,0,6422,,
+ZIKA,CostaRica,2017,7,13,1844,0,6608,,
+ZIKA,CostaRica,2017,8,17,1887,0,6998,,
+ZIKA,CostaRica,2017,9,14,1920,0,7290,,

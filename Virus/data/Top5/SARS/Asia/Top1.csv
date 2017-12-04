@@ -1,0 +1,11 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+SARS,China,2003,3,28,806,34,,,
+SARS,China,2003,4,5,1220,49,,,
+SARS,China,2003,4,12,1309,58,,0,
+SARS,China,2003,4,19,1512,65,,30,
+SARS,China,2003,4,28,2914,131,,161,
+SARS,China,2003,5,5,4280,206,,323,
+SARS,China,2003,5,12,5013,252,,144,
+SARS,China,2003,5,19,5236,289,,40,
+SARS,China,2003,5,26,5316,317,,24,
+SARS,China,2003,6,2,5328,334,,2,

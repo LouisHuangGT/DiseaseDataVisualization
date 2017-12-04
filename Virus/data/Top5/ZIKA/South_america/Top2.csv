@@ -1,0 +1,12 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+ZIKA,Colombia,2016,11,17,8826,0,96421,,
+ZIKA,Colombia,2016,12,15,8826,0,97038,,
+ZIKA,Colombia,2017,1,18,9799,0,96898,,
+ZIKA,Colombia,2017,2,16,9799,0,97220,,
+ZIKA,Colombia,2017,3,16,9802,0,97586,,
+ZIKA,Colombia,2017,4,13,9802,0,97790,,
+ZIKA,Colombia,2017,5,18,9802,0,97983,,
+ZIKA,Colombia,2017,6,15,9802,0,98161,,
+ZIKA,Colombia,2017,7,13,9802,0,98320,,
+ZIKA,Colombia,2017,8,17,9802,0,98474,,
+ZIKA,Colombia,2017,9,14,9802,0,98515,,

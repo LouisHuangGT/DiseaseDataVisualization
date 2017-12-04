@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Germany,2009,5,18,14,0,,0,0
+H1N1,Germany,2009,5,25,17,0,,0,0
+H1N1,Germany,2009,6,1,28,0,,9,0
+H1N1,Germany,2009,6,8,63,0,,20,0
+H1N1,Germany,2009,6,15,170,0,,75,0
+H1N1,Germany,2009,6,22,275,0,,37,0
+H1N1,Germany,2009,6,29,366,0,,33,0
+H1N1,Germany,2009,7,6,505,0,,35,0

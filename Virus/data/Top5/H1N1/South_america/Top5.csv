@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Brazil,2009,5,18,8,0,,0,0
+H1N1,Brazil,2009,5,25,9,0,,1,0
+H1N1,Brazil,2009,6,1,18,0,,8,0
+H1N1,Brazil,2009,6,8,35,0,,7,0
+H1N1,Brazil,2009,6,15,54,0,,2,0
+H1N1,Brazil,2009,6,22,131,0,,35,0
+H1N1,Brazil,2009,6,29,452,0,,53,0
+H1N1,Brazil,2009,7,6,737,1,,0,0

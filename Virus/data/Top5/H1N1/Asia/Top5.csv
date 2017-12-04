@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,India,2009,5,18,1,0,,0,0
+H1N1,India,2009,5,25,1,0,,0,0
+H1N1,India,2009,6,1,1,0,,0,0
+H1N1,India,2009,6,8,4,0,,0,0
+H1N1,India,2009,6,15,16,0,,7,0
+H1N1,India,2009,6,22,44,0,,14,0
+H1N1,India,2009,6,29,64,0,,0,0
+H1N1,India,2009,7,6,129,0,,25,0

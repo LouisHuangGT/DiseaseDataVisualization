@@ -1,0 +1,9 @@
+type,country,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+H1N1,Argentina,2009,5,18,1,0,,0,0
+H1N1,Argentina,2009,5,25,2,0,,1,0
+H1N1,Argentina,2009,6,1,100,0,,63,0
+H1N1,Argentina,2009,6,8,202,0,,55,0
+H1N1,Argentina,2009,6,15,343,0,,0,0
+H1N1,Argentina,2009,6,22,1010,7,,92,3
+H1N1,Argentina,2009,6,29,1488,23,,97,2
+H1N1,Argentina,2009,7,6,2485,60,,898,34
