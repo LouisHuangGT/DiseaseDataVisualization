@@ -17,7 +17,7 @@ var svg = d3.select("body")
                     transmissiondetail[6] = ["A vector is an organism that does not cause disease itself but that transmits infection by conveying pathogens from one host to another."];
                     transmissiondetail[7] = ["Sexually transmitted diseases such as HIV and hepatitis B  are thought to not normally be transmitted through mouth-to-mouth contact, although it is possible to transmit some STDs between the genitals and the mouth, during oral sex."];
 
-              var showLabelFlag = -1;
+              var showLabelFlag = 1;
 
               var radius = h*0.2;
               var centerx = w*2/3;
@@ -75,13 +75,13 @@ var svg = d3.select("body")
                  .append("circle")
                  .attr("cx", function(d) {
 
-                      return d[0];
+                      return w*2;
                  })
                  .attr("cy", function(d) {
-                      return d[1];
+                      return h/2;
                  })
                  .attr("r", function(d) {
-                      return 8;
+                      return 0;
                  })
                  .style("z-index",3)
                  .style("fill", function(d) {
@@ -92,7 +92,9 @@ var svg = d3.select("body")
                  .on("mouseover", function(d) {		
             			tooltip.html(function()
             				{
-            					return "<p><B>"+d[4]+"</p></B>"+"<p>"+d[8]+"</p>";
+            					return "<p><B>"+d[4]+"</p></B>"
+                                     + "<p> Fatality: "+(d[6]*100)+"%<p>"
+                                     + "<p>"+d[8]+"</p>";
             				})
             			.style("left", (d3.event.pageX) + "px")
             			.style("top", (d3.event.pageY + 20) + "px")
@@ -101,8 +103,19 @@ var svg = d3.select("body")
             		})	
                  .on('mouseout',function(){
     				  tooltip.style("opacity",0.0)
-    				})	
-                 ;
+    				});
+              circles.transition()
+                   .duration(1000)
+                   .attr("cx", function(d) {
+                         
+                         return d[0];
+                         })
+                   .attr("cy", function(d) {
+                         return d[1];
+                         })
+                   .attr("r", function(d) {
+                          return 8;
+                          })
               
               var label = svg.selectAll("text")
                  .data(disease)
@@ -112,10 +125,10 @@ var svg = d3.select("body")
                       return d[4];
                  })
                  .attr("x", function(d) {
-                      return d[0]+15;
+                      return w*2;
                  })
                  .attr("y", function(d) {
-                      return d[1]+6;
+                      return h/2;
                  })
                  .attr("font-family", "sans-serif")
                  .attr("font-size", "18px")
@@ -136,7 +149,17 @@ var svg = d3.select("body")
                  .on('mouseout',function(){
     				  tooltip.style("opacity",0.0)
     				});
-              //other stuff
+                   
+                   label.transition()
+                   .duration(1000)
+                   .attr("x", function(d) {
+                         return d[0]+15;
+                         })
+                   .attr("y", function(d) {
+                         return d[1]+6;
+                         });
+                   
+                   //other stuff
               var choice = 0;
               
               var labelx = w*0.07;
@@ -239,7 +262,7 @@ var svg = d3.select("body")
               .attr("width", labelheight/10)
               .attr("height", labelheight/10)
               .attr("fill", "rgb(255,255,255)")
-              .attr("fill-opacity",0)
+              .attr("fill-opacity",1)
               .on("click",showLabels);
               showLabelButtontext = svg.append("text")
               .text("Show Label")
@@ -339,6 +362,9 @@ var svg = d3.select("body")
                     })
                     .attr("x",centerx)
                     .attr("y",centery - (innerRadius+i*radius/10))
+                    .attr("font-size","14px")
+                    .attr("fill","white")
+                    .attr("fill-opactiy",0)
                     .attr("font-family", "Avenir")
                     .style("visibility","hidden");
                   }
@@ -361,10 +387,43 @@ var svg = d3.select("body")
                       return (d[0])+" "+(d[1])+","+arcBoundary[d[7]][0]+" "+arcBoundary[d[7]][1]+","+arcBoundary[d[7]][2]+" "+arcBoundary[d[7]][3];
                     })
                   .style("fill-opacity",0)
-                  .attr("pointer-events", "none")
+                  .attr("pointer-events", "visible")
                   .attr("z-index",2)
                   .style("visibility","hidden")
-                  .style("fill","#8c7df0");
+                  .style("fill","#8c7df0")
+                   .on("mouseover", function(d) {
+                       var id = (Math.floor(d[2]/(Math.PI/4))+2)%8;
+                       
+                       console.log(id);
+                       fantooltip.html(function()
+                                       {
+                                       return "<p><B>"+transmissionmap[parseInt((id+6)%8)]+"</B></p>"+
+                                       "<p>"+transmissiondetail[parseInt((id+6)%8)]+"</p>";
+                                       })
+                       .style("word-wrap","break-word")
+                       .style("visibility","visible")
+                       .style("opacity",0.8);
+                       
+                       d3.select(this).style("fill-opacity",0.6);
+                       
+                       coordfan[id]
+                       .style("fill-opacity",1);
+                       
+                       coordfanlabel[(id+6)%8]
+                       .style("fill","rgba(255,255,255,1)");
+                       })
+                   .on('mouseout',function(d){
+                       var id = (Math.floor(d[2]/(Math.PI/4))+2)%8;
+                       fantooltip.style("visibility","hidden");
+                       
+                       
+                       d3.select(this).style("fill-opacity",0.1);
+                       
+                        coordfan[id].style("fill-opacity",0.6);
+                       
+                       coordfanlabel[(id+6)%8]
+                       .style("fill","rgba(255,255,255,0.6)");
+                       });
 
 
   			  	  var fantooltip = d3.select("body")
@@ -383,7 +442,21 @@ var svg = d3.select("body")
   				  .style("opacity",0.8)
   				  .style("visibility","hidden");
                   for (var i = 0;i<=7;i++)
-                  {
+                   {
+                   
+                   var transx = centerx + Math.cos((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+20);
+                   var transy = centery + Math.sin((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+20);
+                   
+                   coordfanlabel[i] = svg.append("text")
+                   .text(transmissionmap[i])
+                   .attr("transform", "translate("+transx+","+transy+") "+"rotate("+((((i+0.5)*Math.PI/4)+Math.PI/2)/Math.PI*180)+")")
+                   .attr("font-family", "Avenir")
+                   .attr("font-size", "20px")
+                   .attr("pointer-events", "visible")
+                   .attr("z-index",2)
+                   .style("fill","rgba(255,255,255,0.6)")
+                   .style("visibility","hidden");
+                   
                     var arc = d3.svg.arc()
                     .innerRadius(radius+innerRadius)
                     .outerRadius(radius+innerRadius*outerfanratio+innerRadius)
@@ -409,24 +482,19 @@ var svg = d3.select("body")
             				.style("word-wrap","break-word")
             				.style("visibility","visible")
             				.style("opacity",0.8);
+                            
+                            d3.select(this).style("fill-opacity",1);
+                            
+                            coordfanlabel[id]
+                            .style("fill","rgba(255,255,255,1)");
             			})	
                  		.on('mouseout',function(){
-    				  		fantooltip.style("visibility","hidden")
+                            fantooltip.style("visibility","hidden");
+                            coordfanlabel[this.id]
+                            .style("fill","rgba(255,255,255,0.6)");
+                            d3.select(this).style("fill-opacity",0.6);
     					});
 
-                    var transx = centerx + Math.cos((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+20);
-                    var transy = centery + Math.sin((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+20);
-                    coordfanlabel[i] = svg.append("text")
-                    .text(transmissionmap[i])
-                    //.attr("x",centerx + Math.cos((i+0.5)*Math.PI/4)*(radius+innerRadius/2+innerRadius))
-                    //.attr("y",centery + Math.sin((i+0.5)*Math.PI/4)*(radius+innerRadius/2+innerRadius))
-                    .attr("transform", "translate("+transx+","+transy+") "+"rotate("+((((i+0.5)*Math.PI/4)+Math.PI/2)/Math.PI*180)+")")
-                    .attr("font-family", "Avenir")
-                    .attr("font-size", "20px")
-                    .attr("pointer-events", "visible")
-                  	.attr("z-index",2)
-                    .style("fill","white")
-                    .style("visibility","hidden");
                   }
 
                 // if (csvdata[i].transmission == "surfaces") disease[i][7] = 0;
@@ -488,8 +556,7 @@ var svg = d3.select("body")
                   .transition()
                   .duration(500)
                   .attr("fill","black");
-
-
+                   
                   var temprand = new Array;
 
                   circles
@@ -526,7 +593,7 @@ var svg = d3.select("body")
                   d[1] = d[3]*Math.sin(d[2])+centery+6;
                   return d[1];
                   })
-                  .attr("fill-opacity",0);
+                  .attr("fill-opacity",1);
 
                   for (var i = 0;i<=10;i++)
                   {
@@ -548,17 +615,8 @@ var svg = d3.select("body")
                     coordlabel[i]
                     .transition()
                     .duration(1000)
-                    .text(function()
-                    {
-                      return parseInt(i*10)+"%";
-                    })
-                    .attr("x",centerx)
-                    .attr("y",centery - (innerRadius+i*radius/10))
-                    .attr("font-family", "Avenir")
-                    .attr("font-size", "14px")
+                    .attr("fill-opacity",0.8)
                     .style("visibility","visible")
-                    .style("fill","#FFFFFF")
-                    .style("fill-opacity",0.8)
                   }
                   for (var i = 0;i<=7;i++)
                   {
@@ -650,7 +708,7 @@ var svg = d3.select("body")
                   d[1] = d[3]*Math.sin(d[2])+centery+6;
                   return d[1];
                   })
-                  .style("fill-opacity",0);
+                  .attr("fill-opacity",1);
 
                   coordtri
                   .data(disease)
@@ -661,6 +719,7 @@ var svg = d3.select("body")
                     d[1] = d[3]*Math.sin((temprand[i][0]+d[7])*Math.PI/4)+centery;
                     return (d[0])+" "+(d[1])+","+arcBoundary[d[7]][0]+" "+arcBoundary[d[7]][1]+","+arcBoundary[d[7]][2]+" "+arcBoundary[d[7]][3];
                   })
+                  .attr("pointer-events", "visible")
                   .style("visibility","visible")
                   .style("fill-opacity",0.1)
                   .style("fill",function(d)
@@ -669,13 +728,14 @@ var svg = d3.select("body")
                       if (d[5] == "bacterium") return  "#ffe551";
                       if (d[5] == "parasite") return  "#8b7cf1";
                     });
+                   
                   var fancount = new Array();
                   for (var i = 0;i<=7;i++)
                   {
                     coordfan[i]
                         .transition()
                         .duration(1000)
-                        .style("fill-opacity",0.8)
+                        .style("fill-opacity",0.6)
                         .style("visibility","visible")
                         .style("fill",function()
                         {
@@ -707,16 +767,7 @@ var svg = d3.select("body")
                     coordlabel[i]
                     .transition()
                     .duration(1000)
-                    .text(function()
-                    {
-                      return parseInt(i*10)+"%";
-                    })
-                    .attr("x",centerx)
-                    .attr("y",centery - (innerRadius+i*radius/10))
-                    .attr("font-family", "Avenir")
-                    .attr("font-size", "15px")
-                    .style("visibility","hidden")
-                    .style("fill","#FFFFFF")
+                   .style("visibility","hidden");
                   }
                 }
                 
