@@ -1,10 +1,11 @@
-var w = document.documentElement.clientWidth;
-var h = document.documentElement.clientHeight;
+var w = 1400;
+var h = 800;
 var svg = d3.select("body")
                           .append("svg")
                           .attr("width",w)
                           .attr("height", h);
-var datasource = "data/historical epidemics.csv";
+
+ var datasource = "data/historical epidemics.csv";
             d3.csv(datasource,function(error,csvdata){ 
               var transmissiondetail = new Array();
                     transmissiondetail[0] = [];
@@ -43,7 +44,7 @@ var datasource = "data/historical epidemics.csv";
                     transmissiondetail[7][3] = ["genitals and the mouth, during oral sex."];
 
 
-              var radius = h*0.27;
+              var radius = h*0.17;
               var centerx = w*2/3;
               var centery = h/2
               var disease = new Array();
@@ -54,8 +55,8 @@ var datasource = "data/historical epidemics.csv";
                 var r = Math.random();
                 // var x = r*Math.cos(angle)*radius*1.8;
                 // var y = r*Math.sin(angle)*radius*1.8;
-                var x = Math.random()*radius*2-radius;
-                var y = Math.random()*radius*2-radius;
+                var x = (Math.random()*2-1)*radius*1.7;
+                var y = (Math.random()*2-1)*radius*1.7;
                 
                 disease[i] = [];
                 disease[i][0] = x+centerx;
@@ -77,8 +78,6 @@ var datasource = "data/historical epidemics.csv";
 
               }
               console.log(disease);
-              //创建SVG
-              
 
               svg.append("rect")
               .attr("width", w)
@@ -129,15 +128,15 @@ var datasource = "data/historical epidemics.csv";
               //other stuff
               var choice = 0;
               
-              var labelx = w*0.15;
-              var labely = h*0.5;
-              var labelwidth = w*0.1;
+              var labelx = w*0.07;
+              var labely = h*0.6;
+              var labelwidth = w*0.15;
               var labelheight = h*0.27;
               var firstpaddingy = labelheight*0.15;
               var paddingx = labelwidth*0.2;
               var paddingy = labelheight*0.2;
-              var circlewordpaddingx = 30;
-              var circlewordpaddingy = 8;
+              var circlewordpaddingx = paddingx*0.5;
+              var circlewordpaddingy = paddingy*0.2;
 
               var titley = h*0.1;
               var titlepadding = 40;
@@ -152,14 +151,14 @@ var datasource = "data/historical epidemics.csv";
               .attr("x",labelx)
               .attr("y",titley)
               .attr("font-family", "sans-serif")
-              .attr("font-size", "45px")
+              .attr("font-size", "40px")
               .attr("fill","#FFFFFF");
 
               var overviewtext = svg.append("text")
               .attr("x",labelx)
               .attr("y",titley+titlepadding)
               .attr("font-family", "sans-serif")
-              .attr("font-size", "25px")
+              .attr("font-size", "20px")
               .attr("fill","#FFFFFF");
 
               overviewtext.selectAll("tspan")
@@ -178,19 +177,19 @@ var datasource = "data/historical epidemics.csv";
               .attr("rx",10)
               .attr("ry",10)
               .attr("x",labelx)
-              .attr("y",h*0.3)
-              .attr("width", labelwidth*1.2)
+              .attr("y",h*0.4)
+              .attr("width", labelwidth)
               .attr("height", labelheight/6)
               .attr("fill", "rgba(255,255,255,1)")
               .on("click",sortByTransmission);
 
               svg.append("text")
               .text("Sort by Transmission")
-              .attr("x",labelx+25)
-              .attr("y",h*0.33)
+              .attr("x",labelx+paddingx*0.5)
+              .attr("y",h*0.43)
               .attr("fill","black")
               .attr("font-family", "sans-serif")
-              .attr("font-size", "25px")
+              .attr("font-size", "18px")
               .on("click",sortByTransmission);
               
 
@@ -199,18 +198,18 @@ var datasource = "data/historical epidemics.csv";
               .attr("ry",10)
               .text("test")
               .attr("x",labelx)
-              .attr("y",h*0.4)
-              .attr("width", labelwidth*1.2)
+              .attr("y",h*0.5)
+              .attr("width", labelwidth)
               .attr("height", labelheight/6)
               .attr("fill", "rgba(255,255,255,1)")
               .on("click",sortByFatality);
                svg.append("text")
               .text("Sort by Fatality")
-              .attr("x",labelx+40)
-              .attr("y",h*0.43)
+              .attr("x",labelx+paddingx*0.5)
+              .attr("y",h*0.53)
               .attr("fill","black")
               .attr("font-family", "sans-serif")
-              .attr("font-size", "25px")
+              .attr("font-size", "18px")
               .on("click",sortByFatality);
 
               //////////////////////////////
@@ -230,7 +229,7 @@ var datasource = "data/historical epidemics.csv";
               .attr("x",labelx+paddingx/2)
               .attr("y",firstpaddingy+labely)
               .attr("font-family", "sans-serif")
-              .attr("font-size", "26px")
+              .attr("font-size", "22px")
               .attr("fill","#FFFFFF");
 
               svg.append("circle")
@@ -322,13 +321,14 @@ var datasource = "data/historical epidemics.csv";
                   }
                   var transmissionmap = ["surfaces","airbone","airbone droplet","bites","body fluids","fecal-oral","food","sexual contact"];
                   var arcBoundary = new Array();
+                  var outerfanratio = 1/5;
                   for (var i = 0;i<=7;i++)
                   {
                     arcBoundary[i] = [];
-                    arcBoundary[i][0] = Math.cos(i*Math.PI/4+Math.PI/60)*(radius+innerRadius/3+innerRadius)+centerx;
-                    arcBoundary[i][1] = Math.sin(i*Math.PI/4+Math.PI/60)*(radius+innerRadius/3+innerRadius)+centery;
-                    arcBoundary[i][2] = Math.cos((i+1)*Math.PI/4-Math.PI/60)*(radius+innerRadius/3+innerRadius)+centerx;
-                    arcBoundary[i][3] = Math.sin((i+1)*Math.PI/4-Math.PI/60)*(radius+innerRadius/3+innerRadius)+centery;
+                    arcBoundary[i][0] = Math.cos(i*Math.PI/4+Math.PI/60)*(radius+innerRadius*outerfanratio+innerRadius)+centerx;
+                    arcBoundary[i][1] = Math.sin(i*Math.PI/4+Math.PI/60)*(radius+innerRadius*outerfanratio+innerRadius)+centery;
+                    arcBoundary[i][2] = Math.cos((i+1)*Math.PI/4-Math.PI/60)*(radius+innerRadius*outerfanratio+innerRadius)+centerx;
+                    arcBoundary[i][3] = Math.sin((i+1)*Math.PI/4-Math.PI/60)*(radius+innerRadius*outerfanratio+innerRadius)+centery;
                   }
                   coordtri = svg.selectAll("polygon")
                   .data(disease)
@@ -343,7 +343,7 @@ var datasource = "data/historical epidemics.csv";
                   {
                     var arc = d3.svg.arc()
                     .innerRadius(radius+innerRadius)
-                    .outerRadius(radius+innerRadius/3+innerRadius)
+                    .outerRadius(radius+innerRadius*outerfanratio+innerRadius)
                     .startAngle(i*Math.PI/4)
                     .endAngle((i+1)*Math.PI/4)
                     .padAngle(Math.PI/60);
@@ -353,15 +353,15 @@ var datasource = "data/historical epidemics.csv";
                         .style("fill-opacity",0)
                         .style("fill","#8c7df0");
 
-                    var transx = centerx + Math.cos((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius/2+innerRadius+40);
-                    var transy = centery + Math.sin((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius/2+innerRadius+40);
+                    var transx = centerx + Math.cos((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+40);
+                    var transy = centery + Math.sin((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+40);
                     coordfanlabel[i] = svg.append("text")
                     .text(transmissionmap[i])
                     //.attr("x",centerx + Math.cos((i+0.5)*Math.PI/4)*(radius+innerRadius/2+innerRadius))
                     //.attr("y",centery + Math.sin((i+0.5)*Math.PI/4)*(radius+innerRadius/2+innerRadius))
                     .attr("transform", "translate("+transx+","+transy+") "+"rotate("+((((i+0.5)*Math.PI/4)+Math.PI/2)/Math.PI*180)+")")
                     .attr("font-family", "sans-serif")
-                    .attr("font-size", "30px")
+                    .attr("font-size", "25px")
                     .style("fill","white")
                     .style("fill-opacity",0);
                   }
