@@ -72,9 +72,9 @@ var svg = d3.select("body")
   				  .attr("class","tooltip")
   				  .style("width","220px")
   				  //.style("height","220px")
-  				  .style("left", 360 + "px")
-            	  .style("top", 1375 + "px")
-  				  .style("font-size","18px")
+  				  .style("left", (w*0.25) + "px")
+            	  .style("top",(1.72*h) + "px")
+  				  .style("font-size","14px")
   				  .style("font-family", "Avenir")
   				  .style("background", "#979797")
   				  .style("border", "0px")
@@ -134,7 +134,7 @@ var svg = d3.select("body")
                       return h/2;
                  })
                  .attr("font-family", "sans-serif")
-                 .attr("font-size", "15px")
+                 .attr("font-size", "14px")
                  .style("fill", function(d) {
                     if (d[5] == "virus") return "#30ffe8";
                     if (d[5] == "bacterium") return  "#ffe551";
@@ -180,8 +180,8 @@ var svg = d3.select("body")
               
               var labelx = w*0.07;
               var labely = h*0.6;
-              var labelwidth = w*0.13;
-              var labelheight = h*0.27;
+              var labelwidth = w*0.115;
+              var labelheight = h*0.25;
               var firstpaddingy = labelheight*0.15;
               var paddingx = labelwidth*0.15;
               var paddingy = labelheight*0.2;
@@ -201,7 +201,7 @@ var svg = d3.select("body")
               .attr("x",labelx)
               .attr("y",titley)
               .attr("font-family", "Avenir")
-              .attr("font-size", "40px")
+              .attr("font-size", "24px")
               .attr("fill","#FFFFFF");
 
               // var overviewtext = svg.append("text")
@@ -246,11 +246,11 @@ var svg = d3.select("body")
               button1text = svg.append("text")
 
               .text("Show by case fatality rate")
-              .attr("x",labelx+paddingx*0.5)
+              .attr("x",labelx+paddingx)
               .attr("y","268px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
-              .attr("font-size", "18px")
+              .attr("font-size", "14px")
               .on("click",sortByFatality)
               .on("mouseover",function()
               	{
@@ -285,11 +285,11 @@ var svg = d3.select("body")
               	});
                button2text = svg.append("text")
               .text("Show by transmission modes")
-              .attr("x",labelx+paddingx*0.5)
-              .attr("y","355px")
+              .attr("x",labelx+paddingx*0.7)
+              .attr("y","350px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
-              .attr("font-size", "18px")
+              .attr("font-size", "14px")
               .on("click",sortByTransmission)
               .on("mouseover",function()
               	{
@@ -327,7 +327,7 @@ var svg = d3.select("body")
               .attr("y","190px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
-              .attr("font-size", "20px");
+              .attr("font-size", "14px");
               //////////////////////////////
               
               
@@ -345,7 +345,7 @@ var svg = d3.select("body")
               .attr("x",labelx+paddingx)
               .attr("y",firstpaddingy+labely)
               .attr("font-family", "Avenir")
-              .attr("font-size", "21px")
+              .attr("font-size", "14px")
               .attr("fill","#FFFFFF");
 
               svg.append("circle")
@@ -358,7 +358,7 @@ var svg = d3.select("body")
               .attr("x",labelx+paddingx+circlewordpaddingx)
               .attr("y",firstpaddingy+labely+paddingy+circlewordpaddingy)
               .attr("font-family", "Avenir")
-              .attr("font-size", "18px")
+              .attr("font-size", "14px")
               .attr("fill","#30ffe8");
 
               svg.append("circle")
@@ -371,7 +371,7 @@ var svg = d3.select("body")
               .attr("x",labelx+paddingx+circlewordpaddingx)
               .attr("y",firstpaddingy+labely+paddingy*2+circlewordpaddingy)
               .attr("font-family", "Avenir")
-              .attr("font-size", "18px")
+              .attr("font-size", "14px")
               .attr("fill","#ffe551");
 
               svg.append("circle")
@@ -384,7 +384,7 @@ var svg = d3.select("body")
               .attr("x",labelx+paddingx+circlewordpaddingx)
               .attr("y",firstpaddingy+labely+paddingy*3+circlewordpaddingy)
               .attr("font-family", "Avenir")
-              .attr("font-size", "18px")
+              .attr("font-size", "14px")
               .attr("fill","#8b7cf1");
               
               
@@ -499,7 +499,7 @@ var svg = d3.select("body")
                    .text(transmissionmap[i])
                    .attr("transform", "translate("+transx+","+transy+") "+"rotate("+((((i+0.5)*Math.PI/4)+Math.PI/2)/Math.PI*180)+")")
                    .attr("font-family", "Avenir")
-                   .attr("font-size", "20px")
+                   .attr("font-size", "14px")
                    .attr("pointer-events", "visible")
                    .attr("z-index",2)
                    .style("fill","rgba(255,255,255,0.6)")
