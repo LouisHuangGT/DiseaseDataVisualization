@@ -83,7 +83,7 @@ var svg = d3.select("body")
                  .attr("r", function(d) {
                       return 8;
                  })
-                 .attr("z-index",1)
+                 .style("z-index",3)
                  .style("fill", function(d) {
                     if (d[5] == "virus")  return "#30ffe8";
                     if (d[5] == "bacterium") return  "#ffe551";
@@ -324,7 +324,7 @@ var svg = d3.select("body")
                     .attr("cy",centery)
                     .attr("r",innerRadius+i*radius/10)
                     .attr("pointer-events", "none")
-                  	.attr("z-index",2)
+                  	.style("z-index",1)
                     .style({
                       fill: '#f7d3d3',
                       stroke: '#ba1010', 
@@ -542,7 +542,9 @@ var svg = d3.select("body")
                       'stroke-width': 1,
                       'fill-opacity': .02
                     })
+                    .style("z-index",1)
                     .style("visibility","visible");
+                   
                     coordlabel[i]
                     .transition()
                     .duration(1000)
