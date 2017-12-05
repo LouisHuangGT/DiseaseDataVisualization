@@ -31,7 +31,7 @@ var CircleStartPos = [
    { "px": 800, "py": 900},
    { "px": 1000, "py": -100},
    { "px": 1100, "py": 1000},
-   { "px": 900, "py": 0},
+   { "px": 900, "py": -100},
    { "px": 1800, "py": 400},
    { "px": 1400, "py": 1000},
    { "px": 1700, "py": 1200}
@@ -40,76 +40,13 @@ var CircleStartPos = [
 
 //console.log(CirclePos[0].px);
 
-var jsTexts = [
-   { "px": 200, "py": 580,"v" :50000,"start" : 0},
-   { "px": 600, "py": 580,"v" : 15000000,"start" : 0},
-	{ "px": 1100, "py": 580,"v" : 13000000,"start" : 0}
-];
-	
- var firstSvg =  d3.select("body").append("svg")
-                                     .attr("width", 1440)
-                                     .attr("height", 800);
 
- firstSvg.append("image")
-            .attr("x", "0")
-            .attr("y", "0")
-            .attr("width", "1440")
-            .attr("height", "800")
-	        .attr("xlink:href", "image/home2.png");
-	
-var texts1 = firstSvg.selectAll("text")
-                        .data(jsTexts);
-
-var animeTime = 1000;
-var numbers = new Array();
-	numbers[0] = 0;
-	numbers[1] = 0;
-	numbers[2] = 0;
-	
-var max_num = new Array();
-	max_num[0] = 50000;
-	max_num[1] = 15000000;
-	max_num[2] = 13000000;
-
-var text_number = new Array();
-for(var i = 0; i < numbers.length; i++)
-{
-  text_number[i] = firstSvg.append("text")
-	.attr("x",jsTexts[i].px)
-    .attr("y",jsTexts[i].py)
-    .text(numbers[i])
-    .style("fill","white")
-	.style("font-size","45");
-	
-}
-//var a = 0;
-function numberChange()
-{
-	
- for(var i = 0; i < numbers.length; i++)
- {
-	var delta = max_num[i] / (animeTime / 10);
-	if(numbers[i] < max_num[i])
-	numbers[i]+= delta;
-	else
-	numbers[i]= max_num[i];
-	 
-   var numberText = toThousands(numbers[i]);
-   d3.select(text_number[i][0][0]).text(numberText);
- }
-	//console.log(a++);	
-}
-	
-function toThousands(num) {  
-    return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');  
-}  
-setInterval(numberChange,10);	
 
 	
 	
 var svgContainer = d3.select("body").append("svg")
-                                     .attr("width", 1500)
-                                     .attr("height", 1000);
+                                     .attr("width", 1440)
+                                     .attr("height", 800);
 	
 
 	
@@ -126,21 +63,8 @@ var backImage = svgContainer.append("image")
 //d3.select(backImage[0][0]).style("opacity",0.5);	
 	
 var flag = false;
-window.onscroll = function()
-{
-	var t = document.documentElement.scrollTop || document.body.scrollTop;
-    //console.log(t);
-	
-	if(t >= 540 && !flag)
-	{
-		flag = true;
-		var appearAnimeTime = 1000;
-        AppearAnimation(appearAnimeTime);
-		d3.csv("data/PrePageData.csv", typechange,render);
-		TipsBlinkAnimation(appearAnimeTime);
-	}
-	
-}
+d3.csv("data/PrePageData.csv", typechange,render);
+
 
 	
 function typechange(d) {
@@ -202,14 +126,19 @@ var tips_text = svgContainer.append("text")
 	
 
 
-var AppearDelta;
+/*var AppearDelta;
 var backAlpha = 0;
 function AppearAnimation(animetime)
 {
-	AppearDelta = animetime / 10;
-    var timer = setInterval(alphaIncrease,10);
-	if(backAlpha >= 1)
-		clearInterval(timer);
+
+	backImage[0][0].transition.duration(1000)
+		   .attr("opacity",backAlpha);	
+	for(var i = 0; i < 6; i++)
+	{
+		texts[0][i].transition.duration(1000)
+		           .attr("opacity",0);	
+		
+	}
 	
 	
 	
@@ -226,12 +155,34 @@ function alphaIncrease()
 		d3.select(texts[0][i]).style("opacity",backAlpha);	
 		d3.select(rects[0][i]).style("opacity",backAlpha);		
 	}
-}
+}*/
 	
 var circles;
 var transparentCircles;
 function render(data)
 {
+	window.onscroll = function()
+{
+	var t = document.documentElement.scrollTop || document.body.scrollTop;
+    console.log(t);
+	 console.log(flag);
+	
+	if(t >= 1200 && t < 1750 && !flag)
+	{
+		flag = true;
+		var appearAnimeTime = 1000;
+        AppearAnimation(appearAnimeTime);
+		TipsBlinkAnimation(appearAnimeTime);
+		CircleMoveInAnimation(appearAnimeTime);
+	}
+	else if(t > 1800 && flag)
+	{
+		flag = false;
+		CircleMoveOutAnimation();
+		DisappearAnimation()
+	}
+	
+}
 	
 	circles = svgContainer.selectAll("circle")
 	            .data(data);
@@ -311,13 +262,13 @@ function render(data)
 
 								 d3.select(rects[0][i]).style("fill","grey");
 					         	 d3.select(texts[0][i]).style("fill","grey");
-						         d3.selectAll("polygon").remove();
+						         svgContainer.selectAll("polygon").remove();
 						         text.remove();
 					 }
 		         
 	              });	
 
-	CircleInsertAnimation(1000);
+	//CircleInsertAnimation(1000);
 }
 
 
@@ -325,11 +276,35 @@ var AppearDelta;
 var backAlpha = 0;
 function AppearAnimation(animetime)
 {
-	AppearDelta = animetime / 10;
-    var timer = setInterval(alphaIncrease,10);
-	if(backAlpha >= 1)
-		clearInterval(timer);
 	
+	d3.select(backImage[0][0]).transition()
+		.duration(1000)
+		.style("opacity",1);	
+	for(var i = 0; i < 6; i++)
+	{
+		d3.select(texts[0][i]).transition().duration(1000)
+		           .style("opacity",1);	
+		d3.select(rects[0][i]).transition().duration(1000)
+		           .style("opacity",1);	
+		
+	}
+	
+}
+function DisappearAnimation()
+{
+	
+	d3.select(backImage[0][0]).transition()
+		.duration(1000)
+		.style("opacity",0);	
+	for(var i = 0; i < 6; i++)
+	{
+		d3.select(texts[0][i]).transition().duration(1000)
+		           .style("opacity",0);	
+		d3.select(rects[0][i]).transition().duration(1000)
+		           .style("opacity",0);	
+		
+	}
+		
 }
 function alphaIncrease()
 {
@@ -374,16 +349,62 @@ function TipsAlphaChange()
 
 var CircleAnimeDelta;
 var t_record = 0;
-function CircleInsertAnimation(animetime)
+function CircleMoveInAnimation(animetime)
 {
-	CircleAnimeDelta = animetime / 10;
-    var timer = setInterval(CircleMove,10);
 	
-	if(t_record >= 1)
-		{
-			clearInterval(timer);
-			//console.log("Clear");
-		}
+	for(var i = 0; i < circles[0].length; i++)
+	{
+		d3.select(circles[0][i])
+		    .attr("cx",CircleStartPos[i].px)
+		    .attr("cy",CircleStartPos[i].py);
+		
+		d3.select(transparentCircles[0][i])
+		    .attr("cx",CircleStartPos[i].px)
+		    .attr("cy",CircleStartPos[i].py);
+	}
+	
+	for(var i = 0; i < circles[0].length; i++)
+	{
+		d3.select(circles[0][i]).transition()
+			.duration(1500)
+		    .attr("cx",CircleEndPos[i].px)
+		    .attr("cy",CircleEndPos[i].py);
+		
+		d3.select(transparentCircles[0][i]).transition()
+			.duration(1500)
+		    .attr("cx",CircleEndPos[i].px)
+		    .attr("cy",CircleEndPos[i].py);
+		
+	}
+			
+}
+function CircleMoveOutAnimation()
+{
+	
+	/*for(var i = 0; i < circles[0].length; i++)
+	{
+		d3.select(circles[0][i])
+		    .attr("cx",CircleStartPos[i].px)
+		    .attr("cy",CircleStartPos[i].py);
+		
+		d3.select(transparentCircles[0][i])
+		    .attr("cx",CircleStartPos[i].px)
+		    .attr("cy",CircleStartPos[i].py);
+	}*/
+	
+	for(var i = 0; i < circles[0].length; i++)
+	{
+		d3.select(circles[0][i]).transition()
+			.duration(1500)
+		    .attr("cx",CircleStartPos[i].px)
+		    .attr("cy",CircleStartPos[i].py);
+		
+		d3.select(transparentCircles[0][i]).transition()
+			.duration(1500)
+		    .attr("cx",CircleStartPos[i].px)
+		    .attr("cy",CircleStartPos[i].py);
+		
+	}
 			
 }
 function CircleMove()
