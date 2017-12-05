@@ -1,0 +1,33 @@
+name,fatality,transmission,type
+Rotavirus,0.0000 ,fecal-oral,virus
+Norovirus,0.0001 ,surfaces,virus
+Seasonal Flu,0.0010 ,airborne droplet,virus
+Lyme Disease,0.0020 ,bites,bacterium
+Measles,0.0030 ,airborne,virus
+Malaria (P. falciparum),0.0050 ,bites,parasite
+Malaria (P. malariae),0.0050 ,bites,parasite
+Hepatitis B,0.0075 ,body fluids,virus
+Mumps,0.0100 ,airborne droplet,virus
+Rabies (treated),0.0100 ,bites,virus
+Salmonella,0.0100 ,food,bacterium
+Cholera,0.0163 ,food,bacterium
+HIV (treated),0.0210 ,sexual contact,virus
+Influenza Pandemic 1918,0.0250 ,airborne droplet,virus
+E.coli,0.0400 ,fecal-oral,bacterium
+Pertussis (Whooping Cough),0.0400 ,airborne droplet,bacterium
+Dengue Fever,0.0500 ,bites,virus
+Diphtheria,0.0750 ,body fluids,bacterium
+Smallpox,0.1500 ,airborne droplet,virus
+Anthrax (untreated),0.2000 ,airborne,bacterium
+MRSA,0.2000 ,surfaces,bacterium
+Typhoid,0.2000 ,fecal-oral,bacterium
+Polio,0.2200 ,fecal-oral,virus
+C.Difficile,0.2400 ,fecal-oral,bacterium
+Syphilis (untreated),0.3300 ,sexual contact,bacterium
+MERS,0.4500 ,airborne droplet,virus
+Bird Flu (H5N1),0.6000 ,airborne droplet,virus
+Bubonic Plague (untreated),0.6000 ,bites,bacterium
+Tuberculosis (untreated),0.6000 ,airborne droplet,bacterium
+HIV (untreated),0.8000 ,sexual contact,virus
+Pneumonic Plague (untreated),1.0000 ,airborne droplet,bacterium
+Rabies (untreated),1.0000 ,bites,virus
