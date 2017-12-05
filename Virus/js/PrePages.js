@@ -58,9 +58,6 @@ var backImage = svgContainer.append("image")
 	        .attr("xlink:href", "image/HZBackground.png")
 	        .style("opacity",0);
 
-
-
-//d3.select(backImage[0][0]).style("opacity",0.5);	
 	
 var flag = false;
 d3.csv("data/PrePageData.csv", typechange,render);
@@ -98,10 +95,7 @@ var texts = svgContainer.selectAll("text")
     .text(function(d) {return d.label;})
     .style("fill","grey")
 	.style("opacity",0);
-	
-	//tests = svgContainer.selectAll("rect");
-	//tests[1].style("fill","yellow");
-	//d3.select(rects[0][1]).style("fill","yellow");
+
 
 var tips_exist = true;
 var tips_rect = svgContainer.append("rect")
@@ -124,38 +118,6 @@ var tips_text = svgContainer.append("text")
     .style("fill-opacity",0)
     .style("fill","#9c9c9c");
 	
-
-
-/*var AppearDelta;
-var backAlpha = 0;
-function AppearAnimation(animetime)
-{
-
-	backImage[0][0].transition.duration(1000)
-		   .attr("opacity",backAlpha);	
-	for(var i = 0; i < 6; i++)
-	{
-		texts[0][i].transition.duration(1000)
-		           .attr("opacity",0);	
-		
-	}
-	
-	
-	
-}
-function alphaIncrease()
-{
-	backAlpha += 1 / AppearDelta;
-	if(backAlpha >= 1)
-		backAlpha = 1;
-
-	d3.select(backImage[0][0]).style("opacity",backAlpha);	
-	for(var i = 0; i < 6; i++)
-	{
-		d3.select(texts[0][i]).style("opacity",backAlpha);	
-		d3.select(rects[0][i]).style("opacity",backAlpha);		
-	}
-}*/
 	
 var circles;
 var transparentCircles;
@@ -347,8 +309,6 @@ function TipsAlphaChange()
 }
 
 
-var CircleAnimeDelta;
-var t_record = 0;
 function CircleMoveInAnimation(animetime)
 {
 	
@@ -406,41 +366,4 @@ function CircleMoveOutAnimation()
 		
 	}
 			
-}
-function CircleMove()
-{
-	
-	t_record += 1.0 / CircleAnimeDelta;
-	//console.log(t_record >= 1);
-	if(t_record >= 1)
-		t_record = 1;
-	//console.log(t_record);
-	for(var i = 0; i < circles[0].length; i++)
-	{
-		var tx = CircleStartPos[i].px + t_record * (CircleEndPos[i].px - CircleStartPos[i].px);
-		var ty = CircleStartPos[i].py + t_record * (CircleEndPos[i].py - CircleStartPos[i].py);
-		
-				
-		var t = t_record;
-		var x0 = CircleStartPos[i].px;
-		var x1 = CircleEndPos[i].px;
-		
-		var y0 = CircleStartPos[i].py;
-		var y1 = CircleEndPos[i].py;
-		
-		tx = x0 + 6 * (x1-x0) * ((t * t) / 2.0 - (t * t * t) / 3.0) ;
-		ty = y0 + 6 * (y1-y0) * ((t * t) / 2.0 - (t * t * t) / 3.0) ;
-		
-		//console.log(ty);
-		
-		d3.select(circles[0][i]).style("cx",tx);
-		d3.select(circles[0][i]).style("cy",ty);
-		
-		d3.select(transparentCircles[0][i]).style("cx",tx);
-		d3.select(transparentCircles[0][i]).style("cy",ty);
-	}
-	
-	
-	
-		
 }
