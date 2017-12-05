@@ -67,7 +67,21 @@ var svg = d3.select("body")
   				.style("pointer-events", "none")	
   				.attr("font-family", "Avenir")
   				.style("visibility","hidden");
-
+  			var fantooltip = d3.select("body")
+  				  .append("div")
+  				  .attr("class","tooltip")
+  				  .style("width","220px")
+  				  //.style("height","220px")
+  				  .style("left", 360 + "px")
+            	  .style("top", 1375 + "px")
+  				  .style("font-size","18px")
+  				  .style("font-family", "Avenir")
+  				  .style("background", "#979797")
+  				  .style("border", "0px")
+  				  .style("border-radius","8px")	
+  				  .style("pointer-events", "none")	
+  				  .style("opacity",0.8)
+  				  .style("visibility","hidden");
               // Circle Vis
               var circles = svg.selectAll("circle")
                  .data(disease)
@@ -422,6 +436,10 @@ var svg = d3.select("body")
                     arcBoundary[i][2] = Math.cos((i+1)*Math.PI/4-Math.PI/60)*(radius+innerRadius*outerfanratio+innerRadius)+centerx;
                     arcBoundary[i][3] = Math.sin((i+1)*Math.PI/4-Math.PI/60)*(radius+innerRadius*outerfanratio+innerRadius)+centery;
                   }
+
+
+  			  	  
+
                   coordtri = svg.selectAll("polygon")
                   .data(disease)
                   .enter()
@@ -446,7 +464,7 @@ var svg = d3.select("body")
                        .style("word-wrap","break-word")
                        .style("visibility","visible")
                        .style("opacity",0.8);
-                       
+
                        d3.select(this).style("fill-opacity",0.6);
                        
                        coordfan[id]
@@ -471,22 +489,6 @@ var svg = d3.select("body")
                        .style("fill","rgba(255,255,255,0.6)");
                        });
 
-
-  			  	  var fantooltip = d3.select("body")
-  				  .append("div")
-  				  .attr("class","tooltip")
-  				  .style("width","220px")
-  				  //.style("height","220px")
-  				  .style("left", 360 + "px")
-            	  .style("top", 2375 + "px")
-  				  .style("font-size","18px")
-  				  .style("font-family", "Avenir")
-  				  .style("background", "#979797")
-  				  .style("border", "0px")
-  				  .style("border-radius","8px")	
-  				  .style("pointer-events", "none")	
-  				  .style("opacity",0.8)
-  				  .style("visibility","hidden");
                   for (var i = 0;i<=7;i++)
                    {
                    
