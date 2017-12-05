@@ -93,7 +93,7 @@ var svg = d3.select("body")
             			tooltip.html(function()
             				{
             					return "<p><B>"+d[4]+"</p></B>"
-                                     + "<p> Fatality: "+(d[6]*100)+"%<p>"
+                                     + "<p> Fatality Rate: "+(d[6]*100)+"%<p>"
                                      + "<p>"+d[8]+"</p>";
             				})
             			.style("left", (d3.event.pageX) + "px")
@@ -104,18 +104,7 @@ var svg = d3.select("body")
                  .on('mouseout',function(){
     				  tooltip.style("opacity",0.0)
     				});
-              circles.transition()
-                   .duration(1000)
-                   .attr("cx", function(d) {
-                         
-                         return d[0];
-                         })
-                   .attr("cy", function(d) {
-                         return d[1];
-                         })
-                   .attr("r", function(d) {
-                          return 10;
-                          })
+                 
               
               var label = svg.selectAll("text")
                  .data(disease)
@@ -149,15 +138,28 @@ var svg = d3.select("body")
                  .on('mouseout',function(){
     				  tooltip.style("opacity",0.0)
     				});
-                   
-                   label.transition()
-                   .duration(1000)
-                   .attr("x", function(d) {
-                         return d[0]+15;
-                         })
-                   .attr("y", function(d) {
-                         return d[1]+6;
-                         });
+
+              			circles
+              			.transition()
+                  			.duration(1000)
+                  			.attr("cx", function(d) {
+                  			      return d[0];
+                  			      })
+                  			.attr("cy", function(d) {
+                  			      return d[1];
+                  			      })
+                  			.attr("r", function(d) {
+                  			       return 10;
+                  			       });
+                  		label
+                  		.transition()
+                  			.duration(1000)
+                  			.attr("x", function(d) {
+                  			      return d[0]+15;
+                  			      })
+                  			.attr("y", function(d) {
+                  			      return d[1]+6;
+                  			      });
                    
                    //other stuff
               var choice = 0;
@@ -218,7 +220,7 @@ var svg = d3.select("body")
               .attr("height", labelheight/6)
               .attr("fill", "rgb(255,255,255)")
               .attr("fill-opacity",0)
-              .on("click",sortByTransmission)
+              .on("click",sortByFatality)
               .on("mouseover",function()
               	{
                   d3.select(this).style("cursor", "pointer");
@@ -258,7 +260,7 @@ var svg = d3.select("body")
               .attr("height", labelheight/6)
               .attr("fill", "rgb(255,255,255")
               .attr("fill-opacity",0)
-              .on("click",sortByFatality)
+              .on("click",sortByTransmission)
               .on("mouseover",function()
               	{
                   d3.select(this).style("cursor", "pointer");
@@ -605,7 +607,7 @@ var svg = d3.select("body")
                   .duration(500)
                   .attr("fill","black");
                    
-                  var temprand = new Array;
+                  var temprand = new Array();
 
                   circles
                   .data(disease)
