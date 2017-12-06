@@ -3,6 +3,9 @@ var Radar_margin = {top: 50, right: 410, bottom: 10, left: 550},
 	Radar_height = 270 * 3,
 	radius = Math.min(Radar_width/2, Radar_height/2);
 	total_angle = Math.PI * 2 / 5 * 3;
+// ZIKA, EBOLA, H1N1, SARS
+var rTextMax = [0, 581685, 15249, 622482, 8437];
+
 
 var Radar_color = d3.scale.ordinal()
 	.range(["#00C5CD","80c269"]);
@@ -17,6 +20,7 @@ var BigRadial = d3.svg.line.radial()
 var BigRadial_continent = d3.svg.line.radial()
 			.interpolate("linear");
 var dataContinent = new Array();
+var imageY = 0;
 
 RadarCharRun();
 
@@ -59,21 +63,31 @@ function RadarCharRun()
 		.style("x",-Radar_width/5*3/2)
 		.style("y",-Radar_height/20*9)
 		.style("z-index",-1);
+	var imageScale = 1.2;
+	var imageTran = imageScale-1;
+	g.append("circle")
+		.style("r",Radar_width/20*3/2 * imageScale)
+		.style("cx",0)
+		.style("cy",0 +imageY)
+		.style("opacity", 1.0)
+		.style("fill", "black")
+		.style("cursor", "pointer")
+		.style("z-index",2);
 	g.append("image")
 		.attr("id", "words_inside")
 		.attr("href","image/words_inside.png")
-		.style("height",Radar_height/20*3)
-		.style("width",Radar_width/20*3)
-		.style("x",-Radar_width/20*3/2)
-		.style("y",-Radar_height/20*3/2)
+		.style("height",Radar_height/20*3 * imageScale)
+		.style("width",Radar_width/20*3 * imageScale)
+		.style("x",-Radar_width/20*3/2 - Radar_width/20*3 * imageTran/2)
+		.style("y",-Radar_height/20*3/2 - Radar_height/20*3 * imageTran/2 +imageY)
 		.style("z-index",-1);
 	g.append("image")
 		.attr("id", "words_outside")
 		.attr("href","image/words_outside.png")
-		.style("height",Radar_height/20*3)
-		.style("width",Radar_width/20*3)
-		.style("x",-Radar_width/20*3/2)
-		.style("y",-Radar_height/20*3/2)
+		.style("height",Radar_height/20*3 * imageScale)
+		.style("width",Radar_width/20*3 * imageScale)
+		.style("x",-Radar_width/20*3/2 - Radar_width/20*3 * imageTran/2)
+		.style("y",-Radar_height/20*3/2 - Radar_height/20*3 * imageTran/2 +imageY)
 		.style("z-index",-1);
 	g.append("image")
 		.attr("href","image/axis.png")
@@ -85,35 +99,35 @@ function RadarCharRun()
 	g.append("image")
 		.attr("id", "white_small")
 		.attr("href","image/white_small.png")
-		.style("height",Radar_height/20*3)
-		.style("width",Radar_width/20*3)
-		.style("x",-Radar_width/20*3/2)
-		.style("y",-Radar_height/20*3/2)
+		.style("height",Radar_height/20*3 * imageScale)
+		.style("width",Radar_width/20*3 * imageScale)
+		.style("x",-Radar_width/20*3/2 - Radar_width/20*3 * imageTran/2)
+		.style("y",-Radar_height/20*3/2 - Radar_height/20*3 * imageTran/2 +imageY)
 		.style("opacity", 0)
 		.style("z-index",-1);
 	g.append("image")
 		.attr("id", "white_big")
 		.attr("href","image/white_big.png")
-		.style("height",Radar_height/20*3)
-		.style("width",Radar_width/20*3)
-		.style("x",-Radar_width/20*3/2)
-		.style("y",-Radar_height/20*3/2)
+		.style("height",Radar_height/20*3 * imageScale)
+		.style("width",Radar_width/20*3 * imageScale)
+		.style("x",-Radar_width/20*3/2 - Radar_width/20*3 * imageTran/2)
+		.style("y",-Radar_height/20*3/2 - Radar_height/20*3 * imageTran/2 +imageY)
 		.style("opacity", 0)
 		.style("z-index",-1);
 	g.append("image")
 		.attr("href","image/pointer.png")
-		.style("height",Radar_height/20*3)
-		.style("width",Radar_width/20*3)
-		.style("x",-Radar_width/20*3/2)
-		.style("y",-Radar_height/20*3/2)
+		.style("height",Radar_height/20*3 * imageScale)
+		.style("width",Radar_width/20*3 * imageScale)
+		.style("x",-Radar_width/20*3/2 - Radar_width/20*3 * imageTran/2)
+		.style("y",-Radar_height/20*3/2 - Radar_height/20*3 * imageTran/2 +imageY)
 		.style("z-index",-1);
 	g.append("image")
 		.attr("id", "center_img")
 		.attr("href","image/overview.png")
-		.style("height",Radar_height/20*3)
-		.style("width",Radar_width/20*3)
-		.style("x",-Radar_width/20*3/2)
-		.style("y",-Radar_height/20*3/2)
+		.style("height",Radar_height/20*3 * imageScale)
+		.style("width",Radar_width/20*3 * imageScale)
+		.style("x",-Radar_width/20*3/2 - Radar_width/20*3 * imageTran/2)
+		.style("y",-Radar_height/20*3/2 - Radar_height/20*3 * imageTran/2 +imageY)
 		.style("z-index",-1);
 	// g.append("image")
 	// 	.attr("id", "symptom_img")
@@ -123,13 +137,21 @@ function RadarCharRun()
 	// 	.style("y",-Radar_height*0.5)
 	// 	.style("z-index",-1)
 	// 	.style("opacity", 0); 
+	// g.append("image")
+	// 	.attr("id", "tip1")
+	// 	.attr("href","image/tip1.jpg")
+	// 	.style("height",Radar_height/4.5)
+	// 	.style("width",Radar_width/4.5)
+	// 	.style("x",Radar_width*0.073)
+	// 	.style("y",-Radar_height/12)
+	// 	.style("z-index",-1);
 	g.append("image")
 		.attr("id", "tip1")
-		.attr("href","image/tip1.jpg")
+		.attr("href","image/note_plate.png")
 		.style("height",Radar_height/4.5)
 		.style("width",Radar_width/4.5)
-		.style("x",Radar_width*0.073)
-		.style("y",-Radar_height/12)
+		.style("x",Radar_width*0.073-137)
+		.style("y",-Radar_height/12+70)
 		.style("z-index",-1);
 
 	var axisGrid = g.append("g").attr("class", "axisWrapper")
@@ -161,6 +183,7 @@ function RadarCharRun()
 		.style("stroke-width", "1px");
 	//labels
 	axis.append("text")
+		.attr("id", "text_legend")
 		.attr("class", "legend")
 		.style("font-size", function(d, i){ if (d.year!="2018") return"12px"; return "0px";})
 		.attr("text-anchor", "middle")
@@ -169,6 +192,7 @@ function RadarCharRun()
 		.attr("y", function(d, i){ return radius * 1.05 * Math.sin(avg_angle*i - angle_diff + avg_angle/2); })
 		.text(function(d){ return d.year;});
 	axis.append("text")
+		.attr("id", "text_legend")
 		.attr("class", "legend_month")
 		.style("font-size", function(d, i){ if (d.month!=1) return"8px"; return "0px";})
 		.attr("text-anchor", "middle")
@@ -176,6 +200,8 @@ function RadarCharRun()
 		.attr("x", function(d, i){ return -12; })
 		.attr("y", function(d, i){ return -radius / 36 * (i + 25.3); })
 		.text(function(d){ return d.month;});
+
+
 
 	//radial line
 	var rLine = new Array();
@@ -187,6 +213,45 @@ function RadarCharRun()
 	rLineMax[2] = 8437;
 	rLineMax[3] = 581685;
 	rLineMax[4] = 15249;
+
+	axis.append("text")
+		.attr("id", "legend_left")
+		.attr("class", "legend_number")
+		.style("font-size", "12px")
+		.attr("text-anchor", "middle")
+		.attr("dy", "0.35em")
+		.attr("x", function(d, i){ return 0; })
+		.attr("y", function(d, i){ return -radius / 36 * (-1 + 25.3); })
+		.style("opacity", 0)
+		// .attr("x", function(d, i){ return -10+radius*(2/3+1/36) * Math.cos(avg_angle*17 - angle_diff + avg_angle); })
+		// .attr("y", function(d, i){ return 10+radius*(2/3+1/36) * Math.sin(avg_angle*17 - angle_diff + avg_angle); })
+		.text("0");
+	axis.append("text")
+		.attr("id", "legend_mid")
+		.attr("class", "legend_number")
+		.style("font-size", "12px")
+		.attr("text-anchor", "middle")
+		.attr("dy", "0.35em")
+		.attr("x", function(d, i){ return 0; })
+		.attr("y", function(d, i){ return -radius / 36 * (5.7 + 25.3); })
+		.style("opacity", 0)
+		// .attr("x", function(d, i){ return -10+radius*(2/3+1/36) * Math.cos(avg_angle*17 - angle_diff + avg_angle); })
+		// .attr("y", function(d, i){ return 10+radius*(2/3+1/36) * Math.sin(avg_angle*17 - angle_diff + avg_angle); })
+		.text("49999");
+	axis.append("text")
+		.attr("id", "legend_right")
+		.attr("class", "legend_number")
+		.style("font-size", "12px")
+		.attr("text-anchor", "middle")
+		.attr("dy", "0.35em")
+		.attr("x", function(d, i){ return 0; })
+		.attr("y", function(d, i){ return -radius / 36 * (11.5 + 25.3); })
+		.style("opacity", 0)
+		// .attr("x", function(d, i){ return -5+radius * 1.05 * Math.cos(avg_angle*17 - angle_diff + avg_angle); })
+		// .attr("y", function(d, i){ return 5+radius * 1.05 * Math.sin(avg_angle*17 - angle_diff + avg_angle); })
+		.text("99999");
+
+
 	
 
 	var clip_arc = d3.svg.arc()
@@ -239,9 +304,9 @@ function RadarCharRun()
 
 	// transparent circle for listening mouse drag
 	g.append("circle")
-		.style("r",Radar_width/20*3/2)
+		.style("r",Radar_width/20*3/2 * imageScale)
 		.style("cx",0)
-		.style("cy",0)
+		.style("cy",0 +imageY)
 		.style("opacity", 0.0)
 		.style("fill", "red")
 		.style("cursor", "pointer")
@@ -249,9 +314,9 @@ function RadarCharRun()
 		.call(PlateBig_drag);
 
 	g.append("circle")
-		.style("r",Radar_width/20*3/2/3*2)
+		.style("r",Radar_width/20*3/2/3*2 * imageScale)
 		.style("cx",0)
-		.style("cy",0)
+		.style("cy",0 +imageY)
 		.style("opacity", 0.0)
 		.style("fill", "blue")
 		.style("cursor", "pointer")
@@ -259,9 +324,9 @@ function RadarCharRun()
 		.call(PlateSmall_drag);
 
 	g.append("circle")
-		.style("r",Radar_width/20*3/2/3*2/5*2.5)
+		.style("r",Radar_width/20*3/2/3*2/5*2.5 * imageScale)
 		.style("cx",0)
-		.style("cy",0)
+		.style("cy",0 +imageY)
 		.style("opacity", 0.0)
 		.style("fill", "blue")
 		.style("cursor", "pointer")
@@ -630,5 +695,6 @@ function drawRadialLine_Continent(continent, name, rLine, g, avg_angle, angle_di
 
 	});
 }
+
 
 

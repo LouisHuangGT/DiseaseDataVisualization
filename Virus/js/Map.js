@@ -1,5 +1,8 @@
 // var Diease_name = ["","H1N1","ZIKA","SARS","EBOLA"];
 
+var NoteBlink = true;
+
+
 Blink();
 var Blink_opacity = 0.3;
 var Blink_k = -1;
@@ -11,6 +14,12 @@ function Blink() {
     	.style('fill-opacity', function(d){ 
     			var p = d3.select(this).style('fill-opacity');
     			if (p>0&&p<1) return Blink_opacity; 
+    			else return p;
+    		});
+    d3.selectAll('#tip1')
+    	.style('opacity', function(d){ 
+    			var p = d3.select(this).style('opacity');
+    			if (p>0&&p<=1) return Blink_opacity; 
     			else return p;
     		});
     return window.requestAnimationFrame(Blink); // NEW
