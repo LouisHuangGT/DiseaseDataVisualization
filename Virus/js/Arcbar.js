@@ -35,24 +35,24 @@ function showRadialProgress(disease)
     .attr("data-percentage",ratios[0])
     .attr("data-category1","male")
     .attr("data-category2","female")
-    .attr("data-name","gender");
+    .attr("data-name","GENDER");
 
     d3.select("#progress2")
     .attr("data-percentage",ratios[1])
-    .attr("data-category1","young")
-    .attr("data-category2","old")
-    .attr("data-name","age");
+    .attr("data-category1","<40")
+    .attr("data-category2",">40")
+    .attr("data-name","AGE");
 
     var wrapper1 = document.getElementById('progress1');
     var wrapper2 = document.getElementById('progress2');
-    buildProgress(wrapper1, 2);
-    buildProgress(wrapper2, 4);
+    buildProgress(wrapper1,disease, 2);
+    buildProgress(wrapper2,disease, 3);
   });
 }
 
 
 
-function buildProgress(wrapper, k)
+function buildProgress(wrapper,disease, k)
 {
   var paddingAngle = -Math.PI*17/31;
   var ratio = -paddingAngle*2/(2*Math.PI);
@@ -66,7 +66,7 @@ function buildProgress(wrapper, k)
     stroke: '#' + wrapper.dataset.strokeColour,
   }
   
-  var radius = 100;
+  var radius = 90;
   var border = wrapper.dataset.trackWidth;
   var strokeSpacing = wrapper.dataset.strokeSpacing;
   var endAngle = Math.PI * 2;
@@ -94,19 +94,41 @@ function buildProgress(wrapper, k)
   
   // ADD Group container
   var g = svg.append('g')
-    .attr('transform', 'translate(' + boxSize*0.75 + ',' + (boxSize / 2 * k) + ')');
+    .attr('transform', 'translate(' + 200 + ',' + (180 * k) + ')');
   
   var tooltip = d3.select("body")
   .append("div")
   .attr("class","tooltip")
   .style("opacity",0.0);
 
+  var trackfill;
+  var valuefill;
+  if (disease == 4) 
+  {
+  	if (name == "GENDER"){trackfill = "#898989";valuefill = "#FFFFFF"}; 
+  	if (name == "AGE"){trackfill = "#f16565";valuefill = "#760000"}
+  }
+  if (disease == 3) 
+  {
+  	if (name == "GENDER"){trackfill = "#898989";valuefill = "#FFFFFF"}; 
+  	if (name == "AGE"){trackfill = "#ffe35e";valuefill = "#b37d0a"}
+  }
+  if (disease == 1) 
+  {
+  	if (name == "GENDER"){trackfill = "#898989";valuefill = "#FFFFFF"}; 
+  	if (name == "AGE"){trackfill = "#a497ff";valuefill = "#3e338c"}
+  }
+  if (disease == 2) 
+  {
+  	if (name == "GENDER"){trackfill = "#898989";valuefill = "#FFFFFF"}; 
+  	if (name == "AGE"){trackfill = "#30ffe8";valuefill = "#05665b"}
+  }
   //Setup track
   var track = g.append('g').attr('class', 'radial-progress');
   track.append('path')
     .attr('class', 'radial-progress__background')
-    .attr('fill', colours.track)
-    .attr('stroke', colours.stroke)
+    .attr('fill', trackfill)
+    .attr('stroke', trackfill)
     .attr('stroke-width', strokeSpacing + 'px')
     .attr('d', circle.endAngle(endAngle*ratio+paddingAngle))
     .on('mouseover',function(){
@@ -123,8 +145,8 @@ function buildProgress(wrapper, k)
   //Add colour fill
   var value = track.append('path')
     .attr('class', 'radial-progress__value')
-    .attr('fill', colours.fill)
-    .attr('stroke', colours.stroke)
+    .attr('fill', valuefill)
+    .attr('stroke', valuefill)
     .attr('stroke-width', strokeSpacing + 'px')      
     .on('mouseover',function(){
         tooltip.html(category1)
@@ -142,7 +164,34 @@ function buildProgress(wrapper, k)
     .attr('class', 'radial-progress__text')
     .attr('fill', colours.text)
     .attr('text-anchor', 'middle')
-    .attr('dy', '.5rem');
+    .attr('dy', '-2rem');
+  g.append("rect")
+  .attr("x",-30)
+  .attr("y",-17)
+  .attr("width",14)
+  .attr("height",14)
+  .attr("fill",valuefill);
+   g.append("rect")
+  .attr("x",-30)
+  .attr("y",3)
+  .attr("width",14)
+  .attr("height",14)
+  .attr("fill",trackfill);
+  g.append("text")
+  .text(category1)
+  .attr("x",-10)
+  .attr("y",-5)
+  .attr("font-family", "Avenir")
+  .attr("font-size","14px")
+  .attr("fill",valuefill);
+  g.append("text")
+  .text(category2)
+  .attr("x",-10)
+  .attr("y",15)
+  .attr("font-family", "Avenir")
+  .attr("font-size","14px")
+  .attr("fill",trackfill);
+
 
 var lastStart = paddingAngle;
 function update(progress) {
@@ -156,7 +205,10 @@ function update(progress) {
   //  value.attr('fill',"#BA8FD6");
   //update text value
   //numberText.text(formatText(progress));
-  numberText.text(name);
+  numberText
+  .attr("font-family", "Avenir")
+  .attr("font-size","20px")
+  .text(name);
 } 
 
 (function iterate() {
