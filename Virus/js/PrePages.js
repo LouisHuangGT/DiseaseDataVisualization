@@ -174,7 +174,7 @@ function render(data)
 	
 	if(t > 500 && t < 1000)
 	{
-		circles
+		diseasepoint
           .transition()
                   			.duration(1500)
                   			.attr("cx", function(d) {
@@ -186,7 +186,7 @@ function render(data)
                   			.attr("r", function(d) {
                   			       return 10;
                   			       });
-                  		label
+                  		diseaselabel
                   		.transition()
                   			.duration(1500)
                   			.attr("x", function(d) {

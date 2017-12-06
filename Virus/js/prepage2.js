@@ -4,8 +4,8 @@ var svg = d3.select("body")
                           .append("svg")
                           .attr("width",w)
                           .attr("height", h);
-var circles;
-var label;
+var diseasepoint;
+var diseaselabel;
  var datasource = "data/historical epidemics.csv";
             d3.csv(datasource,function(error,csvdata){ 
             	
@@ -19,7 +19,7 @@ var label;
                     transmissiondetail[6] = ["A vector is an organism that does not cause disease itself but that transmits infection by conveying pathogens from one host to another."];
                     transmissiondetail[7] = ["Sexually transmitted diseases such as HIV and hepatitis B  are thought to not normally be transmitted through mouth-to-mouth contact, although it is possible to transmit some STDs between the genitals and the mouth, during oral sex."];
 
-              var showLabelFlag = 1;
+              var showdiseaselabelFlag = 1;
 
               var radius = h*0.22;
               var centerx = w*2/3;
@@ -86,7 +86,7 @@ var label;
               // Circle Vis
  
             	
-              circles = svg.selectAll("circle")
+              diseasepoint = svg.selectAll("circle")
                  .data(disease)
                  .enter()
                  .append("circle")
@@ -123,7 +123,7 @@ var label;
     				});
                  
               
-              label = svg.selectAll("text")
+              diseaselabel = svg.selectAll("text")
                  .data(disease)
                  .enter()
                  .append("text")
@@ -162,7 +162,7 @@ var label;
 				   {
 					  
 				      console.log("Calling this function HUANG");
-				      circles
+				      diseasepoint
               			.transition()
                   			.duration(1500)
                   			.attr("cx", function(d) {
@@ -174,7 +174,7 @@ var label;
                   			.attr("r", function(d) {
                   			       return 10;
                   			       });
-                  		label
+                  		diseaselabel
                   		.transition()
                   			.duration(1500)
                   			.attr("x", function(d) {
@@ -188,13 +188,13 @@ var label;
                    //other stuff
               var choice = 0;
               
-              var labelx = w*0.07;
-              var labely = h*0.6;
-              var labelwidth = w*0.115;
-              var labelheight = h*0.25;
-              var firstpaddingy = labelheight*0.15;
-              var paddingx = labelwidth*0.15;
-              var paddingy = labelheight*0.2;
+              var diseaselabelx = w*0.07;
+              var diseaselabely = h*0.6;
+              var diseaselabelwidth = w*0.115;
+              var diseaselabelheight = h*0.25;
+              var firstpaddingy = diseaselabelheight*0.15;
+              var paddingx = diseaselabelwidth*0.15;
+              var paddingy = diseaselabelheight*0.2;
               var circlewordpaddingx = paddingx*0.5;
               var circlewordpaddingy = paddingy*0.2;
 
@@ -208,14 +208,14 @@ var label;
 
               svg.append("text")
               .text("CHARACTERISTICS OF EPIDEMICS")
-              .attr("x",labelx)
+              .attr("x",diseaselabelx)
               .attr("y",titley)
               .attr("font-family", "Avenir")
               .attr("font-size", "24px")
               .attr("fill","#FFFFFF");
 
               // var overviewtext = svg.append("text")
-              // .attr("x",labelx)
+              // .attr("x",diseaselabelx)
               // .attr("y",titley+titlepadding)
               // .attr("font-family", "Avenir")
               // .attr("font-size", "20px")
@@ -236,12 +236,12 @@ var label;
               button1 = svg.append("rect")
               .attr("rx",10)
               .attr("ry",10)
-              .attr("x",labelx)
+              .attr("x",diseaselabelx)
               .attr("y","247px")
               .attr("stroke-width",2)
               .attr("stroke","white")
-              .attr("width", labelwidth*1.3)
-              .attr("height", labelheight/6)
+              .attr("width", diseaselabelwidth*1.3)
+              .attr("height", diseaselabelheight/6)
               .attr("fill", "rgb(255,255,255)")
               .attr("fill-opacity",0)
               .on("click",sortByFatality)
@@ -256,7 +256,7 @@ var label;
               button1text = svg.append("text")
 
               .text("Show by case fatality rate")
-              .attr("x",labelx+paddingx)
+              .attr("x",diseaselabelx+paddingx)
               .attr("y","268px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
@@ -276,12 +276,12 @@ var label;
               .attr("rx",10)
               .attr("ry",10)
               .text("test")
-              .attr("x",labelx)
+              .attr("x",diseaselabelx)
               .attr("y","330px")
               .attr("stroke-width",2)
               .attr("stroke","white")
-              .attr("width", labelwidth*1.3)
-              .attr("height", labelheight/6)
+              .attr("width", diseaselabelwidth*1.3)
+              .attr("height", diseaselabelheight/6)
               .attr("fill", "rgb(255,255,255")
               .attr("fill-opacity",0)
               .on("click",sortByTransmission)
@@ -295,7 +295,7 @@ var label;
               	});
                button2text = svg.append("text")
               .text("Show by transmission modes")
-              .attr("x",labelx+paddingx*0.7)
+              .attr("x",diseaselabelx+paddingx*0.7)
               .attr("y","350px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
@@ -311,18 +311,18 @@ var label;
               	});
 
 
-               showLabelButton = svg.append("rect")
+               showdiseaselabelButton = svg.append("rect")
               .attr("rx",10)
               .attr("ry",10)
-              .attr("x",labelx)
+              .attr("x",diseaselabelx)
               .attr("y","175px")
               .attr("stroke-width",2)
               .attr("stroke","white")
-              .attr("width", labelheight/10)
-              .attr("height", labelheight/10)
+              .attr("width", diseaselabelheight/10)
+              .attr("height", diseaselabelheight/10)
               .attr("fill", "rgb(255,255,255)")
               .attr("fill-opacity",1)
-              .on("click",showLabels)
+              .on("click",showdiseaselabels)
               .on("mouseover",function()
               	{
                   d3.select(this).style("cursor", "pointer");
@@ -331,9 +331,9 @@ var label;
               	{
               		d3.select(this).style("cursor", "default");
               	});
-              showLabelButtontext = svg.append("text")
-              .text("Show labels")
-              .attr("x",labelx+labelheight/8+10)
+              showdiseaselabelButtontext = svg.append("text")
+              .text("Show diseaselabels")
+              .attr("x",diseaselabelx+diseaselabelheight/8+10)
               .attr("y","190px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
@@ -342,57 +342,57 @@ var label;
               
               
               svg.append("rect")
-              .attr("x",labelx)
-              .attr("y",labely)
-              .attr("width", labelwidth)
-              .attr("height", labelheight)
+              .attr("x",diseaselabelx)
+              .attr("y",diseaselabely)
+              .attr("width", diseaselabelwidth)
+              .attr("height", diseaselabelheight)
               .attr("stroke","red")
               .style("stroke-dasharray", ("3, 3"))
               .attr("fill", "rgba(255, 222, 222, 0.1)");
 
                svg.append("text")
               .text("Pathogen Type")
-              .attr("x",labelx+paddingx)
-              .attr("y",firstpaddingy+labely)
+              .attr("x",diseaselabelx+paddingx)
+              .attr("y",firstpaddingy+diseaselabely)
               .attr("font-family", "Avenir")
               .attr("font-size", "14px")
               .attr("fill","#FFFFFF");
 
               svg.append("circle")
-              .attr("cx",labelx+paddingx)
-              .attr("cy",firstpaddingy+labely+paddingy)
+              .attr("cx",diseaselabelx+paddingx)
+              .attr("cy",firstpaddingy+diseaselabely+paddingy)
               .attr("r",6)
               .attr("fill","#30ffe8");
               svg.append("text")
               .text("Virus")
-              .attr("x",labelx+paddingx+circlewordpaddingx)
-              .attr("y",firstpaddingy+labely+paddingy+circlewordpaddingy)
+              .attr("x",diseaselabelx+paddingx+circlewordpaddingx)
+              .attr("y",firstpaddingy+diseaselabely+paddingy+circlewordpaddingy)
               .attr("font-family", "Avenir")
               .attr("font-size", "14px")
               .attr("fill","#30ffe8");
 
               svg.append("circle")
-              .attr("cx",labelx+paddingx)
-              .attr("cy",firstpaddingy+labely+paddingy*2)
+              .attr("cx",diseaselabelx+paddingx)
+              .attr("cy",firstpaddingy+diseaselabely+paddingy*2)
               .attr("r",6)
               .attr("fill","#ffe551");
               svg.append("text")
               .text("Bacterium")
-              .attr("x",labelx+paddingx+circlewordpaddingx)
-              .attr("y",firstpaddingy+labely+paddingy*2+circlewordpaddingy)
+              .attr("x",diseaselabelx+paddingx+circlewordpaddingx)
+              .attr("y",firstpaddingy+diseaselabely+paddingy*2+circlewordpaddingy)
               .attr("font-family", "Avenir")
               .attr("font-size", "14px")
               .attr("fill","#ffe551");
 
               svg.append("circle")
-              .attr("cx",labelx+paddingx)
-              .attr("cy",firstpaddingy+labely+paddingy*3)
+              .attr("cx",diseaselabelx+paddingx)
+              .attr("cy",firstpaddingy+diseaselabely+paddingy*3)
               .attr("r",6)
               .attr("fill","#8b7cf1");
               svg.append("text")
               .text("Parasite")
-              .attr("x",labelx+paddingx+circlewordpaddingx)
-              .attr("y",firstpaddingy+labely+paddingy*3+circlewordpaddingy)
+              .attr("x",diseaselabelx+paddingx+circlewordpaddingx)
+              .attr("y",firstpaddingy+diseaselabely+paddingy*3+circlewordpaddingy)
               .attr("font-family", "Avenir")
               .attr("font-size", "14px")
               .attr("fill","#8b7cf1");
@@ -404,8 +404,8 @@ var label;
                 var coord = new Array();
                 var coordfan = new Array();
                 var coordtri;
-                var coordlabel = new Array();
-                var coordfanlabel = new Array();
+                var coorddiseaselabel = new Array();
+                var coordfandiseaselabel = new Array();
 
                  for (var i = 0;i<=10;i++)
                   {
@@ -422,7 +422,7 @@ var label;
                       'fill-opacity': 0
                     })
                     .style("visibility","hidden");
-                    coordlabel[i] = svg.append("text")
+                    coorddiseaselabel[i] = svg.append("text")
                     .text(function()
                     {
                       return parseInt(i*10)+"%";
@@ -480,7 +480,7 @@ var label;
                        .style("fill","#f16565")
                        .style("fill-opacity",1);
                        
-                       coordfanlabel[(id+6)%8]
+                       coordfandiseaselabel[(id+6)%8]
                        .style("fill","#f16565");
                        })
                    .on('mouseout',function(d){
@@ -494,7 +494,7 @@ var label;
                        .style("fill","black")
                        .style("fill-opacity",1);
                        
-                       coordfanlabel[(id+6)%8]
+                       coordfandiseaselabel[(id+6)%8]
                        .style("fill","rgba(255,255,255,0.6)");
                        });
 
@@ -504,7 +504,7 @@ var label;
                    var transx = centerx + Math.cos((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+20);
                    var transy = centery + Math.sin((i+0.5)*Math.PI/4-Math.PI/25)*(radius+innerRadius*outerfanratio+innerRadius+20);
                    
-                   coordfanlabel[i] = svg.append("text")
+                   coordfandiseaselabel[i] = svg.append("text")
                    .text(transmissionmap[i])
                    .attr("transform", "translate("+transx+","+transy+") "+"rotate("+((((i+0.5)*Math.PI/4)+Math.PI/2)/Math.PI*180)+")")
                    .attr("font-family", "Avenir")
@@ -544,12 +544,12 @@ var label;
                             .style("fill","#f16565")
                             .style("fill-opacity",1);
                             
-                            coordfanlabel[id]
+                            coordfandiseaselabel[id]
                             .style("fill","#f16565");
             			})	
                  		.on('mouseout',function(){
                             fantooltip.style("visibility","hidden");
-                            coordfanlabel[this.id]
+                            coordfandiseaselabel[this.id]
                             .style("fill","rgba(255,255,255,0.6)");
                             d3.select(this)
                             .style("fill","black")
@@ -568,26 +568,26 @@ var label;
                 // if (csvdata[i].transmission == "sexual contact") disease[i][7] =  7;
                   //fans
 
-                  function showLabels()
+                  function showdiseaselabels()
                   {
-                  	showLabelFlag *= -1;
-                  	if (showLabelFlag>0)
+                  	showdiseaselabelFlag *= -1;
+                  	if (showdiseaselabelFlag>0)
                   	{
-                  		label
+                  		diseaselabel
                   		.transition()
                   		.duration(1000)
                   		.style("visibility","visible")
                   		.style("fill-opacity",1);
-                  		showLabelButton
+                  		showdiseaselabelButton
                   		.attr("fill-opacity",1);
                   	}
                   	else
                   	{
-                  		label
+                  		diseaselabel
                   		.transition()
                   		.duration(1000)
                   		.style("fill-opacity",0);
-                  		showLabelButton
+                  		showdiseaselabelButton
                   		.attr("fill-opacity",0);
                   	}
                   }
@@ -620,7 +620,7 @@ var label;
                    
                   var temprand = new Array();
 
-                  circles
+                  diseasepoint
                   .data(disease)
                   .transition()
                   .duration(1000)
@@ -639,7 +639,7 @@ var label;
                   return d[1];
                   });
   
-                  label
+                  diseaselabel
                   .data(disease)
                   .transition()
                   .duration(1000)
@@ -674,7 +674,7 @@ var label;
                     .style("z-index",1)
                     .style("visibility","visible");
                    
-                    coordlabel[i]
+                    coorddiseaselabel[i]
                     .transition()
                     .duration(1000)
                     .attr("fill-opacity",0.8)
@@ -685,7 +685,7 @@ var label;
                     coordfan[i]
                         .style("visibility","hidden")
                         .style("fill","black");
-                    coordfanlabel[i]
+                    coordfandiseaselabel[i]
                         .transition()
                         .duration(1000)
                         .style("visibility","hidden");
@@ -726,7 +726,7 @@ var label;
                   var temprand = new Array;
                   for (var i = 0;i<csvdata.length;i++)
                     temprand[i] = [];
-                  circles
+                  diseasepoint
                   .data(disease)
                   .transition()
                   .duration(1000)
@@ -742,7 +742,7 @@ var label;
                   return d[1];
                   });
   
-                  label
+                  diseaselabel
                   .data(disease)
                   .transition()
                   .duration(1000)
@@ -784,7 +784,7 @@ var label;
                         .style("fill-opacity",1)
                         .style("visibility","visible")
                         .style("fill","black");
-                    coordfanlabel[i]
+                    coordfandiseaselabel[i]
                     .transition()
                     .duration(1000)
                     .style("visibility","visible");
@@ -804,7 +804,7 @@ var label;
                       'fill-opacity': 0
                     })
                     .style("visibility","hidden");;
-                    coordlabel[i]
+                    coorddiseaselabel[i]
                     .transition()
                     .duration(1000)
                    .style("visibility","hidden");
