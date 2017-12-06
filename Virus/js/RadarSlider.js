@@ -149,6 +149,14 @@ function ScaleSlider(){
 			.on("slide", function(evt, value) {
 				var scale = (100-value[1])/20+1;
 				var k = 0;
+				if (G_DieaseName == "H1N1") k = 3;
+				if (G_DieaseName == "SARS") k = 4;
+				if (G_DieaseName == "ZIKA") k = 1;
+				if (G_DieaseName == "EBOLA") k = 2;
+				var tnum = parseInt(rTextMax[k]/scale);
+				d3.selectAll("#legend_right").text(tnum);
+				d3.selectAll("#legend_mid").text(parseInt(tnum/2));
+				k = 0;
 				if (G_DieaseName == "H1N1") k = 1;
 				if (G_DieaseName == "SARS") k = 2;
 				if (G_DieaseName == "ZIKA") k = 3;
