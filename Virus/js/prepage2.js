@@ -74,7 +74,7 @@ var diseaselabel;
   				  .style("width","220px")
   				  //.style("height","220px")
   				  .style("left", (w*0.25) + "px")
-            	  .style("top",(1.72*h) + "px")
+            	  .style("top",(2.22*h) + "px")
   				  .style("font-size","14px")
   				  .style("font-family", "Avenir")
   				  .style("background", "#979797")
@@ -256,7 +256,7 @@ var diseaselabel;
               button1text = svg.append("text")
 
               .text("Show by case fatality rate")
-              .attr("x",diseaselabelx+paddingx)
+              .attr("x",diseaselabelx+paddingx*0.95)
               .attr("y","268px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
@@ -295,7 +295,7 @@ var diseaselabel;
               	});
                button2text = svg.append("text")
               .text("Show by transmission modes")
-              .attr("x",diseaselabelx+paddingx*0.7)
+              .attr("x",diseaselabelx+paddingx*0.4)
               .attr("y","350px")
               .attr("fill","white")
               .attr("font-family", "Avenir")
@@ -332,7 +332,7 @@ var diseaselabel;
               		d3.select(this).style("cursor", "default");
               	});
               showdiseaselabelButtontext = svg.append("text")
-              .text("Show diseaselabels")
+              .text("Show labels")
               .attr("x",diseaselabelx+diseaselabelheight/8+10)
               .attr("y","190px")
               .attr("fill","white")
