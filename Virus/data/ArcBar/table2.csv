@@ -1,2 +1,2 @@
-male,female,young,old
-0.4891,0.5109,0.7741,0.2259
+male,female,age0,age1,age2
+0.4891,0.5109,0.1885,0.7741,1
