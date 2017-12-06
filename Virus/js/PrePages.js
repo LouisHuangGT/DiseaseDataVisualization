@@ -129,8 +129,8 @@ var texts = svgContainer.selectAll("text")
     .attr("y",function (d) { return 30 + d.py; })
     .text(function(d) {return d.label;})
     .style("fill","grey")
-	.style("opacity",0);
-
+	.style("opacity",0)
+    .style("font-family","Avenir");
 
 var tips_exist = true;
 var tips_rect = svgContainer.append("rect")
@@ -165,7 +165,7 @@ var titleTextArray = new Array();
 var titleCircleArray = new Array();
 function render(data)
 {
-	window.onscroll = function()
+	/*window.onscroll = function()
    {
 	var t = document.documentElement.scrollTop || document.body.scrollTop;
    // console.log(t);
@@ -176,8 +176,8 @@ function render(data)
 	{
 		diseasepoint
           .transition()
-                  			.duration(1500)
-                  			.attr("cx", function(d) {
+           .duration(1500)
+            .attr("cx", function(d) {
                   			      return d[0];
                   			      })
                   			.attr("cy", function(d) {
@@ -217,7 +217,7 @@ function render(data)
 		
 	
 	
-}
+}*/
 	
 	circlesHZ = svgContainer.selectAll("circle")
 	            .data(data);
@@ -311,7 +311,8 @@ for(var i = 0; i < Titletext.length;i++)
     			.text(Titletext[i].label)
     			.style("fill","white")
 	            .style("opacity",0)
-				.style("font-size",Titletext[i].size);
+				.style("font-size",Titletext[i].size)
+	            .style("font-family","Avenir");
 
 }
 

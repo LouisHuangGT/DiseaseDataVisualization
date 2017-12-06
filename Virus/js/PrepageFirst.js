@@ -1,7 +1,7 @@
 var jsTexts = [
-   { "px": 200, "py": 540,"v" :50000,"start" : 0},
-   { "px": 600, "py": 540,"v" : 15000000,"start" : 0},
-	{ "px": 1100, "py": 540,"v" : 13000000,"start" : 0}
+   { "px": 200, "py": 390,"v" :50000,"start" : 0},
+   { "px": 600, "py": 390,"v" : 15000000,"start" : 0},
+	{ "px": 1100, "py": 390,"v" : 13000000,"start" : 0}
 ];
 	
  var firstSvg =  d3.select("body").append("svg")
@@ -10,7 +10,7 @@ var jsTexts = [
 
  firstSvg.append("image")
             .attr("x", "0")
-            .attr("y", "0")
+            .attr("y", "-150")
             .attr("width", "1440")
             .attr("height", "800")
 	        .attr("xlink:href", "image/home2.jpg");
