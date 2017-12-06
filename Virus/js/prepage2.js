@@ -7,6 +7,7 @@ var svg = d3.select("body")
 
  var datasource = "data/historical epidemics.csv";
             d3.csv(datasource,function(error,csvdata){ 
+            	
               var transmissiondetail = new Array();
                     transmissiondetail[0] = ["Diseases that can be transmitted by direct contact are called contagious"];
                     transmissiondetail[1] = ["Airborne transmission refers to infectious agents that are spread via droplet nuclei (residue from evaporated droplets) containing infective microorganisms."];
@@ -23,7 +24,6 @@ var svg = d3.select("body")
               var centerx = w*2/3;
               var centery = h/2
               var disease = new Array();
-              console.log(csvdata.length);
               for (var i = 0;i<csvdata.length;i++)
               {
                 var angle = Math.random()*Math.PI*2 ;
@@ -83,16 +83,19 @@ var svg = d3.select("body")
   				  .style("opacity",0.8)
   				  .style("visibility","hidden");
               // Circle Vis
-              var circles = svg.selectAll("circle")
+              var circles;
+              var label;
+            	
+              circles = svg.selectAll("circle")
                  .data(disease)
                  .enter()
                  .append("circle")
                  .attr("cx", function(d) {
 
-                      return w*2;
+                      return centerx;
                  })
                  .attr("cy", function(d) {
-                      return h/2;
+                      return centery;
                  })
                  .attr("r", function(d) {
                       return 0;
@@ -120,7 +123,7 @@ var svg = d3.select("body")
     				});
                  
               
-              var label = svg.selectAll("text")
+              label = svg.selectAll("text")
                  .data(disease)
                  .enter()
                  .append("text")
@@ -128,10 +131,10 @@ var svg = d3.select("body")
                       return d[4];
                  })
                  .attr("x", function(d) {
-                      return w*2;
+                      return centerx;
                  })
                  .attr("y", function(d) {
-                      return h/2;
+                      return centery;
                  })
                  .attr("font-family", "sans-serif")
                  .attr("font-size", "14px")
@@ -153,9 +156,15 @@ var svg = d3.select("body")
     				  tooltip.style("opacity",0.0)
     				});
 
-              			circles
+              			
+              window.onload = function()
+				{
+				   window.onscroll = function()
+				   {
+				      console.log("Calling this function");
+				      circles
               			.transition()
-                  			.duration(1000)
+                  			.duration(1500)
                   			.attr("cx", function(d) {
                   			      return d[0];
                   			      })
@@ -167,14 +176,15 @@ var svg = d3.select("body")
                   			       });
                   		label
                   		.transition()
-                  			.duration(1000)
+                  			.duration(1500)
                   			.attr("x", function(d) {
                   			      return d[0]+15;
                   			      })
                   			.attr("y", function(d) {
                   			      return d[1]+6;
                   			      });
-                   
+				    }
+				}
                    //other stuff
               var choice = 0;
               
@@ -188,7 +198,7 @@ var svg = d3.select("body")
               var circlewordpaddingx = paddingx*0.5;
               var circlewordpaddingy = paddingy*0.2;
 
-              var titley = h*0.1;
+              var titley = h*0.17;
               var titlepadding = 40;
 
               var overview = new Array();
@@ -197,7 +207,7 @@ var svg = d3.select("body")
               overview[2] =  "most common infectious diseases here." ;
 
               svg.append("text")
-              .text("Characteristics of Epidemics")
+              .text("CHARACTERISTICS OF EPIDEMICS")
               .attr("x",labelx)
               .attr("y",titley)
               .attr("font-family", "Avenir")
@@ -455,7 +465,6 @@ var svg = d3.select("body")
                    .on("mouseover", function(d) {
                        var id = (Math.floor(d[2]/(Math.PI/4))+2)%8;
                        
-                       console.log(id);
                        fantooltip.html(function()
                                        {
                                        return "<p><B>"+transmissionmap[parseInt((id+6)%8)]+"</B></p>"+
@@ -619,12 +628,13 @@ var svg = d3.select("body")
                   temprand[i] = Math.random();
                   d[2] = temprand[i]*2*Math.PI;
                   d[3] = innerRadius+radius*d[6];
+                  d[1] = d[3]*Math.sin(d[2])+centery;
                   d[0] = d[3]*Math.cos(d[2])+centerx;
                   return d[0];
                   })
                   .attr("cy", function(d,i) {
-                  d[2] = temprand[i]*2*Math.PI;
                   d[3] = innerRadius+radius*d[6];
+                  d[0] = d[3]*Math.cos(d[2])+centerx;
                   d[1] = d[3]*Math.sin(d[2])+centery;
                   return d[1];
                   });
@@ -636,14 +646,14 @@ var svg = d3.select("body")
                   .attr("x", function(d,i) {
                   d[2] = temprand[i]*2*Math.PI;
                   d[3] = innerRadius+radius*d[6];
-                  d[0] = d[3]*Math.cos(d[2])+centerx+15;
-                  return d[0];
+                  d[0] = d[3]*Math.cos(d[2])+centerx;
+                  return d[0]+15;
                   })
                   .attr("y", function(d,i) {
                   d[2] = temprand[i]*2*Math.PI;
                   d[3] = innerRadius+radius*d[6];
-                  d[1] = d[3]*Math.sin(d[2])+centery+6;
-                  return d[1];
+                  d[1] = d[3]*Math.sin(d[2])+centery;
+                  return d[1]+6;
                   })
                   .attr("fill-opacity",1);
 
@@ -681,21 +691,9 @@ var svg = d3.select("body")
                         .style("visibility","hidden");
                   }
                   coordtri
-                  .data(disease)
                   .transition()
                   .duration(1000)
-                  .style("visibility","hidden")
-                  .attr("points",function(d,i){
-                    d[0] = d[3]*Math.cos((temprand[i][0]+d[7])*Math.PI/4)+centerx;
-                    d[1] = d[3]*Math.sin((temprand[i][1]+d[7])*Math.PI/4)+centery;
-                    return (d[0])+" "+(d[1])+","+arcBoundary[d[7]][0]+" "+arcBoundary[d[7]][1]+","+arcBoundary[d[7]][2]+" "+arcBoundary[d[7]][3];
-                  })
-                  .style("fill",function(d)
-                    {
-                      if (d[5] == "virus") return "#30ffe8";
-                      if (d[5] == "bacterium") return  "#ffe551";
-                      if (d[5] == "parasite") return  "#8b7cf1";
-                    });
+                  .style("visibility","hidden");
                 }
                 // disease[i][0] = x+centerx;
                 // disease[i][1] = y+centery;
@@ -739,7 +737,6 @@ var svg = d3.select("body")
                   return d[0];
                   })
                   .attr("cy", function(d,i) {
-                    temprand[i][1] = Math.random();
                   d[2] = (temprand[i][0]+d[7])*Math.PI/4;
                   d[1] = d[3]*Math.sin(d[2])+centery;
                   return d[1];
