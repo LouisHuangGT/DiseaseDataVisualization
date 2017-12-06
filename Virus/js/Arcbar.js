@@ -147,6 +147,7 @@ function buildProgress(wrapper,disease,ratios, k,n)
           return parseFloat(t.toFixed(2))+"%"
         })
         	.style("background",trackfill)
+          .style("color","white")
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY + 20) + "px")
             .style("opacity",0.7);
@@ -169,7 +170,8 @@ function buildProgress(wrapper,disease,ratios, k,n)
         .attr('stroke-width', strokeSpacing + 'px')
         .on('mouseover',function(){
             tooltip.html((newratios[n-1-parseInt(this.id)].toFixed(2))+"%")
-              .style("background",valuefill)
+              .style("background",trackfill)
+              .style("color","white")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY + 20) + "px")
                 .style("opacity",0.7);
