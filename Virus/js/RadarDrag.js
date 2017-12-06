@@ -49,6 +49,24 @@ PlateBig_drag.on("dragend", function () {
 														&& (d.type==G_DieaseName || G_DieaseName=='overview') 
 														) return 0.8; return 0;});
 
+	d3.selectAll("#radarArea").attr("transform", "translate(" + 999 + "," + 0 + ")");
+	d3.selectAll("#radarArea").transition().duration(1000)
+		.style("fill-opacity", 0)	
+		.style("stroke-width", 0 + "px");
+	var Continent_name = ["Whole_world","Africa","Europe","Asia","Australia","South_America","North_America"];
+	for (var i =0; i <3; i++)
+		{	
+			d3.selectAll(".Continent_radarArea_"+G_DieaseName+Continent_name[k]+i).attr("transform", "translate(" + 0 + "," + 0 + ")");
+			d3.selectAll(".Continent_radarArea_"+G_DieaseName+Continent_name[k]+i)
+				.transition().duration(1000)
+				.style("fill-opacity", function(d) { return d3.select(this).attr('opa');})	
+				.style("stroke-width", 1.5 + "px");
+			}
+
+
+
+
+	d3.selectAll(".Little_radarArea_"+G_DieaseName).attr("transform", "translate(" + 0 + "," + 0 + ")");
 	d3.selectAll(".Little_radarArea_"+G_DieaseName).transition().duration(1000)
 		.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
 											if ( (year>=MinYear && year<MaxYear)
@@ -58,11 +76,13 @@ PlateBig_drag.on("dragend", function () {
 											if ( (year>=MinYear && year<MaxYear)
 											&& (G_ContinentName==d3.select(this).attr('continent'))  
 											) return "1.5px"; return "0px";});
+	d3.selectAll(".Little_radarText_"+G_DieaseName).attr("transform", "translate(" + 0 + "," + 0 + ")");
 	d3.selectAll(".Little_radarText_"+G_DieaseName).transition().duration(1000)
 		.style("fill-opacity", function(d) { var year = d3.select(this).attr('year');
 											if ( (year>=MinYear && year<MaxYear)
 											&& (G_ContinentName==d3.select(this).attr('continent'))  
 											) return 1.0; return 0;});
+
 
 });
 
@@ -109,9 +129,16 @@ PlateSmall_drag.on("dragend", function () {
 	if (Diease_name2[k]=="EBOLA") G_color = "#30ffe8";
 	if (Diease_name2[k]=="H1N1") G_color = "#ffd930";
 	if (Diease_name2[k]=="SARS") G_color = "#eb6e6e";
+	d3.selectAll("#Scale_slider_rect").style("opacity", 0.8);
+	d3.selectAll(".Scale_slider_text").style("fill", G_color);
 	d3.select("#Scale_slider").style("opacity", 1.0);
-	d3.select("#Scale_slider").select("#handle-two").style("background", G_color);
-	d3.select("#Scale_slider").select(".d3-slider-range").style("background", G_color);
+	d3.select("#Scale_slider").select("#handle-two").style("background", G_color).style("left", "100%");
+	d3.select("#Scale_slider").select(".d3-slider-range").style("background", G_color).style("right", "0%");
+
+	d3.select("#Radar_slider").select("#handle-one").style("left", "0%");
+	d3.select("#Radar_slider").select("#handle-two").style("left", "100%");
+	d3.select("#Radar_slider").select(".d3-slider-range").style("right", "0%");
+	d3.select("#Radar_slider").select(".d3-slider-range").style("left", "0%");
 
 	d3.select("#center_img")
 		.attr("href","image/"+Diease_icon[k]+"_icon.png");
@@ -136,7 +163,7 @@ PlateSmall_drag.on("dragend", function () {
 	// Wordle(k);
 
 	//ArcBar
-	// showRadialProgress(k);
+	showRadialProgress(k);
 	//symptom
 	// d3.selectAll("#symptom_img").transition().duration(1000)
 	// 	.style("opacity", 1.0);
@@ -191,11 +218,27 @@ PlateSmall_drag.on("dragend", function () {
 		.style("fill-opacity", 0)	
 		.style("stroke-width", 0 + "px");
 
-	d3.selectAll(".radarArea_"+Diease_name[k]).attr("transform", "translate(" + 0 + "," + 0 + ")");
-	d3.selectAll(".radarArea_"+Diease_name[k])
-		.transition().duration(1000)
-		.style("fill-opacity", function(d) { return d3.select(this).attr('opa');})	
-		.style("stroke-width", 1.5 + "px");
+	if (G_ContinentName == 'overview'){
+		d3.selectAll(".radarArea_"+Diease_name[k]).attr("transform", "translate(" + 0 + "," + 0 + ")");
+		d3.selectAll(".radarArea_"+Diease_name[k])
+			.transition().duration(1000)
+			.style("fill-opacity", function(d) { return d3.select(this).attr('opa');})	
+			.style("stroke-width", 1.5 + "px");
+	}
+	else{
+		var Cname = G_ContinentName;
+		if (Cname == "South America") Cname = "South_America";
+		if (Cname == "North_America") Cname = "North_America";
+		for (var i =0; i <3; i++)
+		{	
+			d3.selectAll(".Continent_radarArea_"+G_DieaseName+Cname+i).attr("transform", "translate(" + 0 + "," + 0 + ")");
+				d3.selectAll(".Continent_radarArea_"+G_DieaseName+Cname+i)
+					.transition().duration(1000)
+					.style("fill-opacity", function(d) { return d3.select(this).attr('opa');})	
+					.style("stroke-width", 1.5 + "px");}
+
+	}
+	
 
 	d3.selectAll(".Little_radarArea_"+Diease_name[k]).attr("transform", "translate(" + 0 + "," + 0 + ")");
 	d3.selectAll(".Little_radarArea_"+G_DieaseName).transition().duration(1000)
@@ -219,9 +262,3 @@ PlateSmall_drag.on("dragend", function () {
 			.transition().duration(1000)
 			.style("fill-opacity", 0.0);
 });
-
-
-
-
-
-

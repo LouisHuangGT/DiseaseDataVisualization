@@ -18,7 +18,8 @@ var LT_head1 = LT_g.append("text")
 		.text('Epidemic Breakouts in 21st Century')
 		.style("opacity", 0.9)
 		.style("fill","white")
-		.style("font-size", '30px');
+		.style("font-size", '30px')
+		.style("font-family","Avenir");
 var LT_head2 = LT_g.append("text")
 		.attr("class", "LT_head")
 		.attr('x', LT_margin.left)
@@ -26,7 +27,8 @@ var LT_head2 = LT_g.append("text")
 		.text('Though technology and medical studies have been developing rapidly in')
 		.style("opacity", 0.9)
 		.style("fill","white")
-		.style("font-size", '15px');
+		.style("font-size", '15px')
+		.style("font-family","Avenir");
 var LT_head3 = LT_g.append("text")
 		.attr("class", "LT_head")
 		.attr('x', LT_margin.left)
@@ -34,7 +36,8 @@ var LT_head3 = LT_g.append("text")
 		.text('21st century, infectious diseases are still threatening people\'s life.')
 		.style("opacity", 0.9)
 		.style("fill","white")
-		.style("font-size", '15px');
+		.style("font-size", '15px')
+		.style("font-family","Avenir");
 
 LT_g.append("image")
 		.attr("href","image/legend.jpeg")
@@ -152,6 +155,7 @@ function drawTip(k, year, month){
 
 				d3.select(this)
 					.text(d.event_detail)
+					.style("fill","black")
 					.style("cursor", "pointer")
 					.style('opacity', 1.0);
 			}
@@ -159,10 +163,11 @@ function drawTip(k, year, month){
 		.on("mouseout", function(d) {
 			if (d3.select(this).style('opacity')>0 && d.year == year && d.month == month)
 			{
-				text_rect.style('opacity', 0);
+				text_rect.style('opacity', 0.0);
 				d3.select(this)
-					.text(d.event_keyword + '  ('+ d.event_detail.substring(0,35)+'...'+')')
+					.text(d.event_keyword + '  ('+ d.event_detail.substring(0,14)+'...'+')')
 					.style("cursor", "pointer")
+					.style("fill", "#ffffff")
 					.style('opacity', 0.7);
 			}
 		})

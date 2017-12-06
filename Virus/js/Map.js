@@ -117,6 +117,13 @@ function MapDot(g, rScale, k){
 						.style("opacity", 0);
 					tooltext4.transition().duration(200)
 						.style("opacity", 0);
+
+					tooltip.attr('x', 9999);
+					tooltext.attr('x', 9999);
+					tooltext2.attr('x', 9999);
+					tooltext3.attr('x', 9999);
+					tooltext4.attr('x', 9999);
+
 				}
 			})
 			.on("click", function(d){
