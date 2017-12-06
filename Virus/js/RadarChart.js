@@ -45,7 +45,7 @@ function RadarCharRun()
 	var svg = d3.select("body").append("svg")
 			.attr("id", "Radar_svg")
 			.style("float", "left")
-			.attr("width",  Radar_width + Radar_margin.left + Radar_margin.right)
+			.attr("width",  1410)
 			.attr("height", Radar_height + Radar_margin.top + Radar_margin.bottom)
 			.attr("class", "radarRadar_svg");
 
