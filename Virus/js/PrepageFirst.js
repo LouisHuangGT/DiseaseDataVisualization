@@ -1,7 +1,7 @@
 var jsTexts = [
-   { "px": 200, "py": 580,"v" :50000,"start" : 0},
-   { "px": 600, "py": 580,"v" : 15000000,"start" : 0},
-	{ "px": 1100, "py": 580,"v" : 13000000,"start" : 0}
+   { "px": 200, "py": 540,"v" :50000,"start" : 0},
+   { "px": 600, "py": 540,"v" : 15000000,"start" : 0},
+	{ "px": 1100, "py": 540,"v" : 13000000,"start" : 0}
 ];
 	
  var firstSvg =  d3.select("body").append("svg")
@@ -10,10 +10,10 @@ var jsTexts = [
 
  firstSvg.append("image")
             .attr("x", "0")
-            .attr("y", "-150")
+            .attr("y", "0")
             .attr("width", "1440")
             .attr("height", "800")
-	        .attr("xlink:href", "image/home2.png");
+	        .attr("xlink:href", "image/home2.jpg");
 	
 var texts1 = firstSvg.selectAll("text")
                         .data(jsTexts);
@@ -36,8 +36,9 @@ for(var i = 0; i < numbers.length; i++)
 	.attr("x",jsTexts[i].px)
     .attr("y",jsTexts[i].py)
     .text(numbers[i])
-    .style("fill","white")
-	.style("font-size","45");
+    .style("fill","#e9554d")
+	.style("font-family","Impact")
+	.style("font-size","60");
 	
 }
 //var a = 0;
