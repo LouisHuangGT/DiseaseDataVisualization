@@ -13,24 +13,11 @@ function showRadialProgress(disease)
   d3.csv(datasource,function(error,csvdata){  
       if(error){  
           console.log(error);  
-      }  var male = 0;
-      var female = 0;  
-      var young = 0;
-      var old = 0;
-      for( var i=0; i<csvdata.length; i++ ){  
-          if (csvdata[i].gender == "Male")
-            male = male+1;
-          else
-            female = female+1;
-          if (parseInt(csvdata[i].age)<40)
-            young = young + 1;
-          else
-            old = old + 1;
-      }   
-    ratios[0] = male*1.0/(male+female)*100;
-    ratios[1] = young*1.0/(young+old)*100;
-    console.log(ratios[0]);
+      }  
 
+    ratios[0] = csvdata[0].male*100;
+    ratios[1] = csvdata[0].young*100;
+    console.log(ratios[0]);
     d3.select("#progress1")
     .attr("data-percentage",ratios[0])
     .attr("data-category1","male")
@@ -132,10 +119,11 @@ function buildProgress(wrapper,disease, k)
     .attr('stroke-width', strokeSpacing + 'px')
     .attr('d', circle.endAngle(endAngle*ratio+paddingAngle))
     .on('mouseover',function(){
-        tooltip.html(category2)
+        tooltip.html(parseFloat((100-wrapper.dataset.percentage).toFixed(2))+"%")
+        	.style("background",trackfill)
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY + 20) + "px")
-            .style("opacity",1.0);
+            .style("opacity",0.7);
       })
     .on('mouseout',function(){
       tooltip.style("opacity",0.0)
@@ -149,10 +137,11 @@ function buildProgress(wrapper,disease, k)
     .attr('stroke', valuefill)
     .attr('stroke-width', strokeSpacing + 'px')      
     .on('mouseover',function(){
-        tooltip.html(category1)
+        tooltip.html(parseFloat(end.toFixed(2))+"%")
+        	.style("background",valuefill)
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY + 20) + "px")
-            .style("opacity",1.0);
+            .style("opacity",0.7);
       })
     .on('mouseout',function(){
       tooltip.style("opacity",0.0)
