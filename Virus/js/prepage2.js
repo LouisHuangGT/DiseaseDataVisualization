@@ -4,7 +4,8 @@ var svg = d3.select("body")
                           .append("svg")
                           .attr("width",w)
                           .attr("height", h);
-
+var circles;
+var label;
  var datasource = "data/historical epidemics.csv";
             d3.csv(datasource,function(error,csvdata){ 
             	
@@ -83,8 +84,7 @@ var svg = d3.select("body")
   				  .style("opacity",0.8)
   				  .style("visibility","hidden");
               // Circle Vis
-              var circles;
-              var label;
+ 
             	
               circles = svg.selectAll("circle")
                  .data(disease)
@@ -157,11 +157,11 @@ var svg = d3.select("body")
     				});
 
               			
-              window.onload = function()
-				{
-				   window.onscroll = function()
+
+				/*   window.onscroll = function()
 				   {
-				      console.log("Calling this function");
+					  
+				      console.log("Calling this function HUANG");
 				      circles
               			.transition()
                   			.duration(1500)
@@ -183,8 +183,8 @@ var svg = d3.select("body")
                   			.attr("y", function(d) {
                   			      return d[1]+6;
                   			      });
-				    }
-				}
+				    }*/
+
                    //other stuff
               var choice = 0;
               

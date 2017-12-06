@@ -159,18 +159,43 @@ var tips_text = svgContainer.append("text")
 
 
 
-var circles;
+var circlesHZ;
 var transparentCircles;
 var titleTextArray = new Array();
 var titleCircleArray = new Array();
 function render(data)
 {
 	window.onscroll = function()
-{
+   {
 	var t = document.documentElement.scrollTop || document.body.scrollTop;
    // console.log(t);
 	// console.log(flag);
+		console.log("Calling this function ZHANG");
 	
+	if(t > 500 && t < 1000)
+	{
+		circles
+          .transition()
+                  			.duration(1500)
+                  			.attr("cx", function(d) {
+                  			      return d[0];
+                  			      })
+                  			.attr("cy", function(d) {
+                  			      return d[1];
+                  			      })
+                  			.attr("r", function(d) {
+                  			       return 10;
+                  			       });
+                  		label
+                  		.transition()
+                  			.duration(1500)
+                  			.attr("x", function(d) {
+                  			      return d[0]+15;
+                  			      })
+                  			.attr("y", function(d) {
+                  			      return d[1]+6;
+                  			      });
+	}
 	if(t >= 1200 && t < 1750 && !flag)
 	{
 		flag = true;
@@ -179,17 +204,22 @@ function render(data)
 		TipsBlinkAnimation(appearAnimeTime);
 		CircleMoveInAnimation(appearAnimeTime);
 	}
-	else if(t > 1800 && flag)
+	else if(flag && ((t > 1800 && t < 1900) ||(t < 1200 && t > 1100) ))
 	{
 		flag = false;
 		CircleMoveOutAnimation();
 		TipsBlinkAnimationStop()
 		DisappearAnimation()
 	}
+		
+	
+		
+		
+	
 	
 }
 	
-	circles = svgContainer.selectAll("circle")
+	circlesHZ = svgContainer.selectAll("circle")
 	            .data(data);
 	
 	transparentCircles = svgContainer.selectAll("circle")
@@ -203,7 +233,7 @@ function render(data)
                 .style("fill", function(d) { return d.color; })
 	            .style("fill-opacity",0.4);
 		   
-	circles.enter().append("circle")
+	circlesHZ.enter().append("circle")
 	            .attr("cx", function (d) { return -5000; })
                 .attr("cy", function (d) { return -5000; })
                 .attr("r", function (d) { return 10 + d.number/1.5; })
@@ -451,9 +481,9 @@ function TipsAlphaChange()
 function CircleMoveInAnimation(animetime)
 {
 	
-	for(var i = 0; i < circles[0].length; i++)
+	for(var i = 0; i < circlesHZ[0].length; i++)
 	{
-		d3.select(circles[0][i])
+		d3.select(circlesHZ[0][i])
 		    .attr("cx",CircleStartPos[i].px)
 		    .attr("cy",CircleStartPos[i].py);
 		
@@ -462,9 +492,9 @@ function CircleMoveInAnimation(animetime)
 		    .attr("cy",CircleStartPos[i].py);
 	}
 	
-	for(var i = 0; i < circles[0].length; i++)
+	for(var i = 0; i < circlesHZ[0].length; i++)
 	{
-		d3.select(circles[0][i]).transition()
+		d3.select(circlesHZ[0][i]).transition()
 			.duration(1500)
 		    .attr("cx",CircleEndPos[i].px)
 		    .attr("cy",CircleEndPos[i].py);
@@ -480,20 +510,11 @@ function CircleMoveInAnimation(animetime)
 function CircleMoveOutAnimation()
 {
 	
-	/*for(var i = 0; i < circles[0].length; i++)
-	{
-		d3.select(circles[0][i])
-		    .attr("cx",CircleStartPos[i].px)
-		    .attr("cy",CircleStartPos[i].py);
-		
-		d3.select(transparentCircles[0][i])
-		    .attr("cx",CircleStartPos[i].px)
-		    .attr("cy",CircleStartPos[i].py);
-	}*/
+
 	
-	for(var i = 0; i < circles[0].length; i++)
+	for(var i = 0; i < circlesHZ[0].length; i++)
 	{
-		d3.select(circles[0][i]).transition()
+		d3.select(circlesHZ[0][i]).transition()
 			.duration(1500)
 		    .attr("cx",CircleStartPos[i].px)
 		    .attr("cy",CircleStartPos[i].py);
