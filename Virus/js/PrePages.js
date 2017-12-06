@@ -37,6 +37,29 @@ var CircleStartPos = [
    { "px": 1700, "py": 1200}
 ];
 
+var Titletext = [
+   { "px": 77, "py": 101,"label" : "SIGNIFICANT BREAKOUTS BEFORE 21ST CENTURY","size" : 24},
+   { "px": 106, "py": 152,"label" : "plague","size" : 14},
+	{ "px": 191, "py": 152,"label" : "small pox","size" : 14},
+	{ "px": 293, "py": 152,"label" : "cholera","size" : 14},
+	{ "px": 384, "py": 152,"label" : "influenza","size" : 14},
+	{ "px": 1098, "py": 158,"label" : "death number","size" : 14},
+	{ "px": 1267, "py": 158,"label" : "Min-Max","size" : 14}
+];
+
+var TitleCircle = [
+   { "px": 90, "py": 148,"r" : 18,"color" : "#30ffe8"},
+    { "px": 175, "py": 148,"r" : 18,"color" : "#ffd930"},
+	{ "px": 277, "py": 148,"r" : 18,"color" : "#eb6e6e"},
+	{ "px": 368, "py": 148,"r" : 18,"color" : "#8b7cf1"},
+	{ "px": 1059, "py": 150,"r" : 7,"color" : "#30ffe8"},
+	{ "px": 1070, "py": 150,"r" : 11,"color" : "#30ffe8"},
+	{ "px": 1085, "py": 150,"r" : 15,"color" : "#30ffe8"},
+	{ "px": 1240, "py": 155,"r" : 25,"color" : "#30ffe8"},
+	{ "px": 1240, "py": 155,"r" : 39,"color" : "#30ffe8"}
+];
+
+
 
 //console.log(CirclePos[0].px);
 
@@ -57,6 +80,18 @@ var backImage = svgContainer.append("image")
             .attr("height", "800")
 	        .attr("xlink:href", "image/HZBackground.png")
 	        .style("opacity",0);
+
+
+/*var text1 = svgContainer.selectAll("text")
+                        .data(Titletext)
+                        .enter()
+                        .append("text")
+                        .attr("x",function(d){return d.px;})
+    					.attr("y",function(d){return d.py;})
+    					.text(function(d){return d.label;})
+    					.style("fill","white")
+						.style("font-size",function(d){return d.size;});*/
+
 
 	
 var flag = false;
@@ -88,7 +123,7 @@ var rects = svgContainer.selectAll("rect")
 
 var texts = svgContainer.selectAll("text")
                         .data(jsRects);
-	
+	                    
 	texts.enter().append("text")
 	.attr("x",function (d) { return 220 + d.px; })
     .attr("y",function (d) { return 30 + d.py; })
@@ -119,15 +154,22 @@ var tips_text = svgContainer.append("text")
     .style("fill","#9c9c9c");
 	
 	
+
+
+
+
+
 var circles;
 var transparentCircles;
+var titleTextArray = new Array();
+var titleCircleArray = new Array();
 function render(data)
 {
 	window.onscroll = function()
 {
 	var t = document.documentElement.scrollTop || document.body.scrollTop;
-    console.log(t);
-	 console.log(flag);
+   // console.log(t);
+	// console.log(flag);
 	
 	if(t >= 1200 && t < 1750 && !flag)
 	{
@@ -141,6 +183,7 @@ function render(data)
 	{
 		flag = false;
 		CircleMoveOutAnimation();
+		TipsBlinkAnimationStop()
 		DisappearAnimation()
 	}
 	
@@ -229,6 +272,53 @@ function render(data)
 					 }
 		         
 	              });	
+	
+for(var i = 0; i < Titletext.length;i++)
+{
+   titleTextArray[i] = svgContainer.append("text")
+	            .attr("x",Titletext[i].px)
+    			.attr("y",Titletext[i].py)
+    			.text(Titletext[i].label)
+    			.style("fill","white")
+	            .style("opacity",0)
+				.style("font-size",Titletext[i].size);
+
+}
+
+
+for(var i = 0; i < TitleCircle.length;i++)
+{
+   
+	titleCircleArray[i] = svgContainer.append("circle")
+	            .attr("cx", TitleCircle[i].px)
+                .attr("cy", TitleCircle[i].py)
+                .attr("r", TitleCircle[i].r / 2)
+                .style("fill", TitleCircle[i].color)
+		        .style("fill-opacity",0);
+	
+	/*if(i == TitleCircle.length - 1)
+	{
+			   svgContainer.append("circle")
+	            .attr("cx", TitleCircle[i].px)
+                .attr("cy", TitleCircle[i].py)
+                .attr("r", TitleCircle[i].r / 2)
+                .style("fill", TitleCircle[i].color)
+		        .style("fill-opacity",0.49);
+	}
+	else
+	{
+		svgContainer.append("circle")
+	            .attr("cx", TitleCircle[i].px)
+                .attr("cy", TitleCircle[i].py)
+                .attr("r", TitleCircle[i].r / 2)
+                .style("fill", TitleCircle[i].color);
+		        .style("fill-opacity",0);
+	}*/
+
+
+}
+	
+
 
 	//CircleInsertAnimation(1000);
 }
@@ -250,6 +340,25 @@ function AppearAnimation(animetime)
 		           .style("opacity",1);	
 		
 	}
+	for(var i = 0; i < titleTextArray.length; i++)
+	{
+		titleTextArray[i].transition().duration(1000)
+		                .style("opacity",1);
+		/*d3.select(text_number[i][0][0]).transition().duration(1000)
+		                .style("opacity",0);	*/
+	}
+	for(var i = 0; i < titleCircleArray.length; i++)
+	{
+		if(i == titleCircleArray.length - 1)
+			titleCircleArray[i].transition().duration(1000)
+		                .style("fill-opacity",0.49);
+		else
+		titleCircleArray[i].transition().duration(1000)
+		                .style("fill-opacity",1);
+		
+		/*d3.select(text_number[i][0][0]).transition().duration(1000)
+		                .style("opacity",0);	*/
+	}
 	
 }
 function DisappearAnimation()
@@ -265,6 +374,21 @@ function DisappearAnimation()
 		d3.select(rects[0][i]).transition().duration(1000)
 		           .style("opacity",0);	
 		
+	}
+	
+	for(var i = 0; i < titleTextArray.length; i++)
+	{
+		titleTextArray[i].transition().duration(1000)
+		                .style("opacity",0);
+		/*d3.select(text_number[i][0][0]).transition().duration(1000)
+		                .style("opacity",0);	*/
+	}
+	for(var i = 0; i < titleCircleArray.length; i++)
+	{
+		titleCircleArray[i].transition().duration(1000)
+		                .style("fill-opacity",0);
+		/*d3.select(text_number[i][0][0]).transition().duration(1000)
+		                .style("opacity",0);	*/
 	}
 		
 }
@@ -286,17 +410,32 @@ var alpha_rect = 0;
 var alpha_text = 0;
 var rect_helper = 0.21;
 var text_helper = 1;
+var timer
 function TipsBlinkAnimation(animetime)
 {
 	//AppearDelta = animetime / 10;
-    var timer = setInterval(TipsAlphaChange,10);
+    timer = setInterval(TipsAlphaChange,10);
 	
 }
+function TipsBlinkAnimationStop()
+{
+	clearInterval(timer);
+	alpha_rect = 0;
+    alpha_text = 0;
+	rect_helper = 0.21;
+	text_helper = 1;
+	d3.select(tips_rect[0][0]).transition().duration(1000)
+		.style("opacity",alpha_rect);	
+    d3.select(tips_text[0][0]).transition().duration(1000)
+		.style("fill-opacity",alpha_text);	
+	
+}
+
 function TipsAlphaChange()
 {
-	alpha_rect += rect_helper / AppearDelta;
-	alpha_text += text_helper / AppearDelta
-	
+	alpha_rect += rect_helper / 100;
+	alpha_text += text_helper / 100;
+
 	if(alpha_text >= 1 || alpha_text <= 0)
 	{
 		rect_helper *= -1;	
