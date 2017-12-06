@@ -176,10 +176,12 @@ function drawLittleRadialLine(continent, name, rLine, g, avg_angle, angle_diff, 
 			.attr("class", "radialLine_"+name);
 
 		var blobWrapper = g.select(".radialLine_"+name);
+		var coun = country;
+		if (coun == "United States of America") coun = "USA";
 		g.append('text')
-			.text(country)
+			.text(coun)
 			.attr("id", "radarArea")
-			.attr('x', country.length*Text_left[num])
+			.attr('x', coun.length*Text_left[num])
 			.attr("class", "Little_radarText_"+name)
 			.style('font-size', Text_size[num])
 			.attr("year", minYear)
