@@ -17,6 +17,10 @@ PlateBig_drag.on("drag", function () {
 		var degree = Math.atan2(-PreBigy*x+PreBigx*y, PreBigx*x+PreBigy*y) /Math.PI*180;
 		PreBigx = x; PreBigy = y;
 		DegreeBig = DegreeBig + degree;
+		var s = d3.select("#words_outside").style("x");
+		var dx = parseFloat(s.substring(0, s.length-2))+imageY;
+		s = d3.select("#words_outside").style("y");
+		var dy = parseFloat(s.substring(0, s.length-2))+imageY;
 		d3.select("#words_outside")
 			.style("-webkit-transform", "rotate("+DegreeBig+"deg)")
 			.style("-moz-transform", "rotate("+DegreeBig+"deg)")
@@ -206,11 +210,16 @@ PlateSmall_drag.on("dragend", function () {
 					.attr("y2", function(d){ return radius * Math.sin(avg_angle*(d.year-2000) - angle_diff); })
 					.style("stroke-width", function(d) { if (d.year>=2000 && d.year<=2012) return "1px"; return "0px"});	
 
-	Radar_transition.selectAll("text")
+	Radar_transition.selectAll("#text_legend")
 		.attr("x", function(d){ return radius * 1.05 * Math.cos(avg_angle*(d.year-2000) - angle_diff + avg_angle/2); })
 		.attr("y", function(d){ return radius * 1.05 * Math.sin(avg_angle*(d.year-2000) - angle_diff + avg_angle/2); })
 		.style("font-size", function(d) { if (d.year>=2000 && d.year<2012 && d.year!="2018") return "12px"; return "0px"})
 		.text(function(d, i){ return d.month;});
+
+	Radar_transition.selectAll(".legend_number").style("opacity", 1.0);
+	var tnum = rTextMax[k];
+	Radar_transition.selectAll("#legend_right").text(tnum);
+	Radar_transition.selectAll("#legend_mid").text(parseInt(tnum/2));
 
 	var Diease_name = ["overview","ZIKA","EBOLA","H1N1","SARS"];
 	d3.selectAll("#radarArea").attr("transform", "translate(" + 999 + "," + 0 + ")");
