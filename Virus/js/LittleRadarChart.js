@@ -1,3 +1,6 @@
+var SmallRadial = d3.svg.line.radial()
+			.interpolate("linear");
+
 LittleRadarChart(Math.min(Radar_width/4.5, Radar_height/4.5), 0.91, 0.2, 1);
 LittleRadarChart(Math.min(Radar_width/9, Radar_height/9), 0.81, 0.6, 2);
 LittleRadarChart(Math.min(Radar_width/9, Radar_height/9), 0.95, 0.6, 3);
@@ -86,11 +89,11 @@ function LittleRadarChart(radius, height_ratio, width_ratio, num)
 	for (var i = 0; i < 7; i++){
 		drawLittleRadialLine(ContinentName[i], 'H1N1', rLine[1], g, total_angle / 12, angle_diff, num, 0);	//H1N1
 		drawLittleRadialLine(ContinentName[i], 'H1N1', rLine[1], g, total_angle / 12, angle_diff, num, 1);	//H1N1
-		drawLittleRadialLine(ContinentName[i], 'SARS', rLine[2], g, total_angle / 12, angle_diff, num, 6);	//SARS
 		drawLittleRadialLine(ContinentName[i], 'SARS', rLine[2], g, total_angle / 12, angle_diff, num, 7);	//SARS
-		drawLittleRadialLine(ContinentName[i], 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num, 3);	//ZIKA
+		drawLittleRadialLine(ContinentName[i], 'SARS', rLine[2], g, total_angle / 12, angle_diff, num, 6);	//SARS
 		drawLittleRadialLine(ContinentName[i], 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num, 4);	//ZIKA
 		drawLittleRadialLine(ContinentName[i], 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num, 5);	//ZIKA
+		drawLittleRadialLine(ContinentName[i], 'ZIKA', rLine[3], g, total_angle / 12, angle_diff, num, 3);	//ZIKA
 		drawLittleRadialLine(ContinentName[i], 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, num, 9);	//EBOLA
 		drawLittleRadialLine(ContinentName[i], 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, num, 10);	//EBOLA
 		drawLittleRadialLine(ContinentName[i], 'EBOLA', rLine[4], g, total_angle / 12, angle_diff, num, 11);	//EBOLA
@@ -100,22 +103,66 @@ function LittleRadarChart(radius, height_ratio, width_ratio, num)
 }
 
 function drawLittleRadialLine(continent, name, rLine, g, avg_angle, angle_diff, num, k){
+	//tooltip
+	var tooltip = g.append("rect")
+		.attr("class", "Radar_tooltip")
+		.attr("width", 175)
+		.attr("height", 35)
+		.style("opacity", 0)
+		.style('z-index', 5);
+	var tooltext = g.append("text")
+		.attr("class", "Radar_tooltext")
+		.style("opacity", 0)
+		.attr('x', 999)
+		.style('z-index', 5);
+	var tooltext2 = g.append("text")
+		.attr("class", "Radar_tooltext")
+		.style("opacity", 0)
+		.attr('x', 999)
+		.style('z-index', 5);
+
 	var Line_color = ["#ffffff","#ffe35e","#867313", "#ffffff","#a497ff", "#5e4dd8", "#ffffff","#f16565", "#ba0100", "#ffffff","#30ffe8", "#147469","#ffffff"];
-	var Line_opacity = [0.65, 0.65, 0.34];
+	var Line_opacity = [0.34, 0.34, 0.34];
 	var ts = 10;
 	var Text_size = [0, ts*2, ts, ts, ts, ts];
-	var Text_left = [0, 4,2,2,2,2]
+	var Text_left = [0, -3,-2,-2,-2,-2]
 	d3.csv("data/Top5/"+name+"/"+continent+"/"+"Top"+num+".csv", function(error, data) {
 		if (error) {return;}
 
 		if (continent == 'Whole_world') continent = 'overview';
 		if (continent == 'South_America') continent = 'South America';
 		if (continent == 'North_America') continent = 'North America';
+
+		//find min and max
+		var dmin = 999999;
+		var dmax = 0;
+		var minYear = 2018;
+		var minMonth = [12, 12, 12];
+		var maxMonth = [1, 1, 1];
+		var country = '';
+		data.forEach(function(d) {
+			var value = 0;
+			if (k%3==0) value = parseInt(d.cal_case);
+			if (k%3==1) value = parseInt(d.cal_death);
+			if (k%3==2) value = parseInt(d.suspect);
+			var d1 = dmin;
+			var d2 = dmax;
+			if (value > dmax) dmax = value;
+			if (value < dmin) dmin = value;
+			if (d.year<minYear) minYear = d.year;
+			country = d.country;
+			});
+
+		// data.forEach(function(d) {
+		// 	var i = d.year-minYear;
+		// 	if (i<=1){
+		// 		if (d.month > maxMonth[i]) maxMonth[i] = d.month;
+		// 		if (d.month < minMonth[i]) minMonth[i] = d.month;
+		// 	}
+		// });
 		
 		var count = 0;
-		var radarLine = d3.svg.line.radial()
-			.interpolate("linear")
-			.radius(function(d) { 
+		SmallRadial.radius(function(d) { 
 				count = count + 1;
 				if (count == 1) return 0;
 				if (k%3==0) return rLine(d.cal_case);
@@ -124,17 +171,18 @@ function drawLittleRadialLine(continent, name, rLine, g, avg_angle, angle_diff, 
 			 })
 			.angle(function(d) { return (d.month-1)*avg_angle - angle_diff + avg_angle/31*d.day + Math.PI/2; });
 		
-		var blobWrapper = g.append("g")
+		var bb = g.append("g")
 			.data(data)
 			.attr("class", "radialLine_"+name);
 
-		blobWrapper.append('text')
-			.text(function(d) { return d.country; })
+		var blobWrapper = g.select(".radialLine_"+name);
+		g.append('text')
+			.text(country)
 			.attr("id", "radarArea")
-			.attr('x', function(d) { return -d.country.length*Text_left[num]; })
+			.attr('x', country.length*Text_left[num])
 			.attr("class", "Little_radarText_"+name)
 			.style('font-size', Text_size[num])
-			.attr("year", function(d) { return d.year; })
+			.attr("year", minYear)
 			.attr("continent", continent)
 			.style('fill', 'white')
 			.style('fill-opacity', 0.0);
@@ -143,7 +191,7 @@ function drawLittleRadialLine(continent, name, rLine, g, avg_angle, angle_diff, 
 			.attr("id", "radarArea")
 			.attr("class", "Little_radarArea_"+name)
 			.attr("clip-path", "url(#Little_Line_clip_"+num+")")
-			.attr("d", function(d) { return radarLine(data); })
+			.attr("d", function(d) { return SmallRadial(data); })
 			.attr("year", function(d) { return d.year; })
 			.attr("continent", continent)
 			.attr("name", name+num)
@@ -153,18 +201,54 @@ function drawLittleRadialLine(continent, name, rLine, g, avg_angle, angle_diff, 
 			.style("stroke-width", 0.0 + "px")
 			.style("stroke", function(d) { return Line_color[1+k]; })
 			.on('mouseover', function(d){
-				if (d3.select(this).style("fill-opacity") > 0){
+				// if (d3.select(this).style("fill-opacity") > 0){
 					d3.select(this)
 						.transition().duration(300)
 						.style("fill-opacity", 1.0);	
-				}
+
+
+					var textType = ['', 'Infected Cases: ', 'Death Cases: ', 'Suspected Cases: '];
+					var newX = d3.mouse(this)[0] + 10;
+					var newY = d3.mouse(this)[1] + 30;	
+					var year = d3.select(this).attr("year");
+					tooltext.attr('x', newX)
+						.attr('y', newY)
+						.transition().duration(200)
+						// .text(name+", "+Month_index[minMonth[year-minYear]]+" ~ "+Month_index[maxMonth[year-minYear]]+", "+year)
+						.text(name)
+						.style('text-align', 'left')
+						.style('opacity', 0.8);
+					tooltext2.attr('x', newX)
+						.attr('y', newY+12)
+						.transition().duration(200)
+						.text(
+							textType[(k%3)+1]+dmin+" ~ "+dmax
+						)
+						.style('text-align', 'left')
+						.style('opacity', 0.8);
+					tooltip.attr('x', newX-8)
+						.attr('y', newY-15)
+						.transition().duration(200)
+						.style('opacity', 0.5)
+						.style('fill', d3.select(this).style("fill"));
+				// }
 			})
 			.on('mouseout', function(d,i){
-				if (d3.select(this).style("fill-opacity") > 0){
+				// if (d3.select(this).style("fill-opacity") > 0){
 					d3.select(this)
 						.transition().duration(300)
 						.style("fill-opacity", d3.select(this).attr('opa'));
-				}
+
+					tooltip.transition().duration(200)
+					.style("opacity", 0);
+					tooltext.transition().duration(200)
+						.style("opacity", 0);
+					tooltext2.transition().duration(200)
+						.style("opacity", 0);
+					tooltip.attr('x', 9999);
+					tooltext.attr('x', 9999);
+					tooltext2.attr('x', 9999);
+				// }
 			});
 
 	});

@@ -86,11 +86,60 @@ function RadarSlider(){
 
 ScaleSlider();
 function ScaleSlider(){
+	d3.select("#Radar_svg")
+		.append("rect")
+		.attr("id","Scale_slider_rect")
+		.style("x", Radar_margin.left*1.03)
+		.style("y", Radar_height/5*3 + Radar_margin.top + Radar_margin.bottom*2.75 +18)
+		.attr("width", Radar_width*0.15)
+		.attr("height", 4.8)
+		.style("fill", "white")
+		.style("opacity", 0.0);
+	d3.select("#Radar_svg")
+		.append("text")
+		.attr("id","Scale_slider_rect")
+		.attr("class","Scale_slider_text")
+		.attr("x", Radar_margin.left*1.03+26)
+		.attr("y", Radar_height/5*3 + Radar_margin.top + Radar_margin.bottom*2.75 +10)
+		.attr("width", 65)
+		.attr("height", 22)
+		.style("fill", "white")
+		.style("opacity", 0.0)
+		.text("change scale")
+		.style("font-size", 12+"px")
+		.style("font-family","PingFangSC");
+	d3.select("#Radar_svg")
+		.append("text")
+		.attr("id","Scale_slider_rect")
+		.attr("class","Scale_slider_text")
+		.attr("x", Radar_margin.left*1.03+26 -40)
+		.attr("y", Radar_height/5*3 + Radar_margin.top + Radar_margin.bottom*2.75 +15 + 20)
+		.attr("width", 65)
+		.attr("height", 22)
+		.style("fill", "white")
+		.style("opacity", 0.0)
+		.text("500%")
+		.style("font-size", 12+"px")
+		.style("font-family","PingFangSC");
+	d3.select("#Radar_svg")
+		.append("text")
+		.attr("id","Scale_slider_rect")
+		.attr("class","Scale_slider_text")
+		.attr("x", Radar_margin.left*1.03+26 +70)
+		.attr("y", Radar_height/5*3 + Radar_margin.top + Radar_margin.bottom*2.75 +15 +20)
+		.attr("width", 65)
+		.attr("height", 22)
+		.style("fill", "white")
+		.style("opacity", 0.0)
+		.text("100%")
+		.style("font-size", 12+"px")
+		.style("font-family","PingFangSC");
+
 	d3.select("body")
 		.append("div")
 		.attr("id","Scale_slider")
 		.style("left", Radar_margin.left*1.03 + "px")
-		.style("top", Radar_height/5*3 + Radar_margin.top + Radar_margin.bottom*2.75 + "px")
+		.style("top", Radar_height/5*3 + Radar_margin.top + (Radar_margin.bottom*2.75-5) + "px")
 		.style("width", Radar_width*0.15 + "px")
 		.style("opacity", 0)
 		.call(d3.slider()
@@ -98,12 +147,32 @@ function ScaleSlider(){
 			.value([0, 100])
 			.step(1)
 			.on("slide", function(evt, value) {
-				var scale = 100-value[1]+1;
-				console.log(scale);
-				// d3.selectAll(".radarArea_"+G_DieaseName)
-				// 	.attr("d", function(d){ console.log(d3.select(this).attr("d"));return d3.select(this).attr("d")*scale;})
+				var scale = (100-value[1])/20+1;
+				var k = 0;
+				if (G_DieaseName == "H1N1") k = 1;
+				if (G_DieaseName == "SARS") k = 2;
+				if (G_DieaseName == "ZIKA") k = 3;
+				if (G_DieaseName == "EBOLA") k = 4;
+				var rLine = d3.scale.linear().range([radius*(2/3+1/36), radius]).domain([0, rLineMax[k]]);
+				if (G_ContinentName == 'overview'){
+					BigRadial.radius(function(d, i) { if (i==0) return 0; if (rLine(d.value*scale)>radius) return radius; return rLine(d.value*scale); });
+					d3.selectAll(".radarArea_"+G_DieaseName)
+						.attr("d", function(d) {return BigRadial(d); })
 
 				}
+				else{
+					BigRadial_continent.radius(function(d) {if (rLine(d.value*scale)>radius) return radius; return rLine(d.value*scale); });
+					var Cname = G_ContinentName;
+					if (Cname == "South America") Cname = "South_America";
+					if (Cname == "North_America") Cname = "North_America";
+					var ii = 2;
+					if (G_DieaseName=="EBOLA"||G_DieaseName=="ZIKA") ii++;
+					for (var i = 0; i < ii; i++){
+						d3.selectAll(".Continent_radarArea_"+G_DieaseName+Cname+i)
+							.attr("d", BigRadial_continent(dataContinent[G_DieaseName+Cname+i]))
+						}
+
+				}}
 				)
 			);
 	d3.select("#Scale_slider").select("#handle-one").style("opacity", 0);
@@ -112,15 +181,15 @@ function ScaleSlider(){
 
 
 //update
-function RadarSlider_update(l,r){
-	var Radar_transition = d3.select("#Radar_slider").transition().duration(1);
-	l = l/Radar_width*100.0;
-	r = r/Radar_width*100.0;
-	Radar_transition.select("#handle-one")
-		.style("left", l +"%");
-	Radar_transition.select("#handle-two")
-		.style("left", r +"%");
-	Radar_transition.select("div")
-		.style("left", l +"%")
-		.style("right", (100.0-r)+"%");
-}
+// function RadarSlider_update(l,r){
+// 	var Radar_transition = d3.select("#Radar_slider").transition().duration(1);
+// 	l = l/Radar_width*100.0;
+// 	r = r/Radar_width*100.0;
+// 	Radar_transition.select("#handle-one")
+// 		.style("left", l +"%");
+// 	Radar_transition.select("#handle-two")
+// 		.style("left", r +"%");
+// 	Radar_transition.select("div")
+// 		.style("left", l +"%")
+// 		.style("right", (100.0-r)+"%");
+// }

@@ -1,0 +1,11 @@
+type,continent,year,month,day,cal_case,cal_death,suspect,new_case,new_death
+SARS,North America,2003,3,28,80,3,0,0,
+SARS,North America,2003,4,5,189,7,0,0,
+SARS,North America,2003,4,12,267,10,0,3,
+SARS,North America,2003,4,19,352,12,0,18,
+SARS,North America,2003,4,28,183,18,0,0,
+SARS,North America,2003,5,5,209,22,0,7,
+SARS,North America,2003,5,12,212,22,0,0,
+SARS,North America,2003,5,19,217,23,0,2,
+SARS,North America,2003,5,26,225,26,0,8,
+SARS,North America,2003,6,2,255,30,0,29,
