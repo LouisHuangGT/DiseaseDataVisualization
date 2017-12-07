@@ -141,6 +141,7 @@ function drawLittleRadialLine(continent, name, rLine, g, avg_angle, angle_diff, 
 		var maxMonth = [1, 1, 1];
 		var country = '';
 		data.forEach(function(d) {
+			if (continent == 'Asia' && name =='H1N1') console.log(num+" "+d.country);
 			var value = 0;
 			if (k%3==0) value = parseInt(d.cal_case);
 			if (k%3==1) value = parseInt(d.cal_death);
